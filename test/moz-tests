@@ -1,0 +1,715 @@
+begin test: e4x/undefined/regress-349814.js
+ PASSED! Section 1 of test - decompilation of e4x literals
+ PASSED! Section 1 of test - decompilation of e4x literals: compile actual
+begin test: e4x/undefined/regress-349815.js
+ PASSED! Section 1 of test - decompilation of parameterized e4x xmllist literal
+ PASSED! Section 1 of test - decompilation of parameterized e4x xmllist literal: compile actual
+begin test: e4x/undefined/regress-349822.js
+begin test: e4x/undefined/regress-349956.js
+ PASSED! Section 1 of test - decompilation of <x/>.@*
+ PASSED! Section 1 of test - decompilation of <x/>.@*: compile actual
+begin test: e4x/undefined/regress-350226.js
+ PASSED! Section 1 of test - decompilation of <x/>.@[*]
+ PASSED! Section 1 of test - decompilation of <x/>.@[*]: compile actual
+begin test: e4x/undefined/regress-350531.js
+ FAILED! Section Section 1 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) == " b "; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) == ' b '; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - decompilation of function (){ return (@['a'])=='b'}: compile actual
+ FAILED! Section Section 2 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) . toXMLString ( ) ; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) . toXMLString ( ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 2 of test - decompilation of function (){ return (@['a'])=='b'}: compile actual
+begin test: e4x/undefined/regress-352649.js
+ FAILED! Section Section 1 of test - decompilation of e4x literal after |if| block : Expected value ' ( function ( ) { if ( g ) { p ; } ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : " x " , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) . _get ( " i " ) ; } ) ;', Actual value ' ( function ( ) { if ( g ) { p ; } ( ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : " x " , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) . _get ( " i " ) ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - decompilation of e4x literal after |if| block: compile actual
+begin test: e4x/undefined/regress-352789.js
+ FAILED! Section Section 1 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return new ( a ( ) . __E4X . attrIdentifier ( " z " ) ) ( ) ; } ) ;', Actual value ' ( function ( ) { return new ( a ( ) ) . __E4X . attrIdentifier ( " z " ) ( ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - Decompilation of new and .@: compile actual
+ FAILED! Section Section 2 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return ( new a ) . __E4X . attrIdentifier ( " z " ) ; } ) ;', Actual value ' ( function ( ) { return new a . __E4X . attrIdentifier ( " z " ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 2 of test - Decompilation of new and .@: compile actual
+ PASSED! Section 3 of test - Decompilation of new and .@
+ PASSED! Section 3 of test - Decompilation of new and .@: compile actual
+begin test: e4x/undefined/regress-429249.js
+ PASSED! trap should not change decompilation <x/> : before trap
+ PASSED! trap should not change decompilation <x/> : before trap: compile actual
+begin test: e4x/undefined/regress-461233.js
+ FAILED! Section function() { return {0: (4, <></>) }; } : Expected value ' ( function ( ) { return { 0 : ( 4 , ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorList ( void 0 ) ) ) } ; } ) ;', Actual value ' ( function ( ) { return ( { 0 : ( 4 , ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorList ( void 0 ) ) ) } ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! function() { return {0: (4, <></>) }; }: compile actual
+begin test: e4x/undefined/11.1.1.js
+begin test: e4x/undefined/11.1.3.js
+ PASSED! Section 1 of test - 11.1.3 - Wildcard Identifiers
+begin test: e4x/undefined/11.1.4-05.js
+ FAILED! Section Section 1 of test - 11.1.4 - XML Initializer - Comment hiding parsing/scanning : Expected value '  duh NL    there ', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/11.1.4-06.js
+ FAILED! Section Section 1 of test - 11.1.4 - ]] should be allowed in CDATA Section : Expected value '[object Object]', Actual value 'ReferenceError: xml is not defined'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/11.1.5.js
+ FAILED! Section Section 1 of test - 11.1.5 - XMLList Initializer : Expected value 'xml', Actual value 'object'  of test - 
+ FAILED! undefined
+ PASSED! Section 2 of test - 11.1.5 - XMLList Initializer
+ FAILED! Section Section 3 of test - 11.1.5 - XMLList Initializer : Expected value 'xml', Actual value 'object'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/11.2.1.js
+ FAILED! Section Section 1 of test - 11.2.1 - Property Accessors : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/11.2.3.js
+begin test: e4x/undefined/11.3.2.js
+begin test: e4x/undefined/11.4.1.js
+ FAILED! Section Section 1 of test - 11.4.1 - Addition Operator : Expected value 'xml', Actual value 'string'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 11.4.1 - Addition Operator : Type mismatch, expected type object, actual type string Expected value '[object Object]', Actual value '[object Object][object Object][object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 11.4.1 - Addition Operator : Expected value 'xml', Actual value 'string'  of test - 
+ FAILED! undefined
+ PASSED! Section 4 of test - 11.4.1 - Addition Operator
+ FAILED! Section Section 5 of test - 11.4.1 - Addition Operator : Expected value 'xml', Actual value 'string'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 6 of test - 11.4.1 - Addition Operator : Expected value '[object Object][object Object][object Object][object Object][object Object]', Actual value '[object Object][object Object]'  of test - 
+ FAILED! undefined
+ PASSED! Section 7 of test - 11.4.1 - Addition Operator
+ FAILED! Section Section 8 of test - 11.4.1 - Addition Operator : Expected value '1699.98', Actual value 'NaN'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 9 of test - 11.4.1 - Addition Operator : Expected value '469.98', Actual value 'NaN'  of test - 
+ FAILED! undefined
+ PASSED! Section 10 of test - 11.4.1 - Addition Operator
+ FAILED! Section Section 11 of test - 11.4.1 - Addition Operator : Expected value '123 Foobar Ave.Bellevue', Actual value '[object Object][object Object]'  of test - 
+ FAILED! undefined
+ PASSED! Section 12 of test - 11.4.1 - Addition Operator
+ FAILED! Section Section 13 of test - 11.4.1 - Addition Operator : Expected value 'WA98008', Actual value '[object Object][object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/11.5.1.js
+ PASSED! Section 1 of test - 11.5.1 - Equality Operators
+ PASSED! Section 2 of test - 11.5.1 - Equality Operators
+ PASSED! Section 3 of test - 11.5.1 - Equality Operators
+ PASSED! Section 4 of test - 11.5.1 - Equality Operators
+ PASSED! Section 5 of test - 11.5.1 - Equality Operators
+ PASSED! Section 6 of test - 11.5.1 - Equality Operators
+ FAILED! Section Section 7 of test - 11.5.1 - Equality Operators : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 8 of test - 11.5.1 - Equality Operators
+ FAILED! Section Section 9 of test - 11.5.1 - Equality Operators : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 10 of test - 11.5.1 - Equality Operators : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 11 of test - 11.5.1 - Equality Operators
+ PASSED! Section 12 of test - 11.5.1 - Equality Operators
+ PASSED! Section 13 of test - 11.5.1 - Equality Operators
+ PASSED! Section 14 of test - 11.5.1 - Equality Operators
+ FAILED! Section Section 15 of test - 11.5.1 - Equality Operators : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 16 of test - 11.5.1 - Equality Operators
+ PASSED! Section 16 of test - 11.5.1 - Equality Operators
+begin test: e4x/undefined/11.6.1.js
+ PASSED! Section 1 of test - 11.6.1 - XML Assignment
+begin test: e4x/undefined/11.6.3.js
+begin test: e4x/undefined/regress-301545.js
+ PASSED! Section 11.1.1 - Attribute Identifiers Do not crash when attribute-op name collides with local var of test - 11.1.1 - Attribute Identifiers Do not crash when attribute-op name collides with local var
+begin test: e4x/undefined/regress-366123.js
+ PASSED! Section 1 of test - Compiling long XML filtering predicate
+begin test: e4x/undefined/regress-305335.js
+begin test: e4x/undefined/regress-321547.js
+begin test: e4x/undefined/regress-327534.js
+ FAILED! Section Section 1 of test - uneval on E4X gives Error: xml is not a function : Expected value 'No Error', Actual value 'ReferenceError: uneval is not defined'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-327897.js
+ PASSED! Section 1 of test - Crash in js_GetStringBytes
+begin test: e4x/undefined/regress-354151-01.js
+begin test: e4x/undefined/regress-354151-02.js
+begin test: e4x/undefined/regress-374025.js
+begin test: e4x/undefined/regress-410192.js
+begin test: e4x/undefined/regress-450871-01.js
+ PASSED! Section 1 of test - Do not crash: __proto__ = <x/>; <x/>.lastIndexOf(this, false)
+begin test: e4x/undefined/regress-450871-02.js
+ PASSED! Section 1 of test - Do not crash: __proto__ = <x/>; <x/>.indexOf(this)
+begin test: e4x/undefined/regress-462734-01.js
+ PASSED! Section 1 of test - Do not assert: pobj_ == obj2
+begin test: e4x/undefined/regress-280844-1.js
+begin test: e4x/undefined/regress-280844-2.js
+begin test: e4x/undefined/regress-313952-01.js
+ PASSED! Section 1 of test - 13.3.5.2 - root QName.uri
+begin test: e4x/undefined/regress-324117.js
+begin test: e4x/undefined/regress-339785.js
+ FAILED! Section Section 1 of test - scanner: memory exposure to scripts : Expected value 'unknown XML entity a', Actual value 'Unexpected token <'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - scanner: memory exposure to scripts
+ PASSED! Section 2 of test - scanner: memory exposure to scripts
+ PASSED! Section 3 of test - scanner: memory exposure to scripts
+ PASSED! Section 4 of test - scanner: memory exposure to scripts
+ PASSED! Section 5 of test - scanner: memory exposure to scripts
+ PASSED! Section 6 of test - scanner: memory exposure to scripts
+ PASSED! Section 7 of test - scanner: memory exposure to scripts
+ PASSED! Section 8 of test - scanner: memory exposure to scripts
+ PASSED! Section 9 of test - scanner: memory exposure to scripts
+ PASSED! Section 10 of test - scanner: memory exposure to scripts
+ PASSED! Section 11 of test - scanner: memory exposure to scripts
+ PASSED! Section 12 of test - scanner: memory exposure to scripts
+ PASSED! Section 13 of test - scanner: memory exposure to scripts
+ PASSED! Section 14 of test - scanner: memory exposure to scripts
+ PASSED! Section 15 of test - scanner: memory exposure to scripts
+ PASSED! Section 16 of test - scanner: memory exposure to scripts
+ PASSED! Section 17 of test - scanner: memory exposure to scripts
+ PASSED! Section 18 of test - scanner: memory exposure to scripts
+ PASSED! Section 19 of test - scanner: memory exposure to scripts
+ PASSED! Section 20 of test - scanner: memory exposure to scripts
+ PASSED! Section 21 of test - scanner: memory exposure to scripts
+ PASSED! Section 22 of test - scanner: memory exposure to scripts
+ PASSED! Section 23 of test - scanner: memory exposure to scripts
+ PASSED! Section 24 of test - scanner: memory exposure to scripts
+ PASSED! Section 25 of test - scanner: memory exposure to scripts
+ PASSED! Section 26 of test - scanner: memory exposure to scripts
+ PASSED! Section 27 of test - scanner: memory exposure to scripts
+ PASSED! Section 28 of test - scanner: memory exposure to scripts
+ PASSED! Section 29 of test - scanner: memory exposure to scripts
+ PASSED! Section 30 of test - scanner: memory exposure to scripts
+ PASSED! Section 31 of test - scanner: memory exposure to scripts
+ PASSED! Section 32 of test - scanner: memory exposure to scripts
+ PASSED! Section 33 of test - scanner: memory exposure to scripts
+ PASSED! Section 34 of test - scanner: memory exposure to scripts
+ PASSED! Section 35 of test - scanner: memory exposure to scripts
+ PASSED! Section 36 of test - scanner: memory exposure to scripts
+ PASSED! Section 37 of test - scanner: memory exposure to scripts
+ PASSED! Section 38 of test - scanner: memory exposure to scripts
+ PASSED! Section 39 of test - scanner: memory exposure to scripts
+ PASSED! Section 40 of test - scanner: memory exposure to scripts
+ PASSED! Section 41 of test - scanner: memory exposure to scripts
+ PASSED! Section 42 of test - scanner: memory exposure to scripts
+ PASSED! Section 43 of test - scanner: memory exposure to scripts
+ PASSED! Section 44 of test - scanner: memory exposure to scripts
+ PASSED! Section 45 of test - scanner: memory exposure to scripts
+ PASSED! Section 46 of test - scanner: memory exposure to scripts
+ PASSED! Section 47 of test - scanner: memory exposure to scripts
+ PASSED! Section 48 of test - scanner: memory exposure to scripts
+ PASSED! Section 49 of test - scanner: memory exposure to scripts
+ PASSED! Section 50 of test - scanner: memory exposure to scripts
+ PASSED! Section 51 of test - scanner: memory exposure to scripts
+ PASSED! Section 52 of test - scanner: memory exposure to scripts
+ PASSED! Section 53 of test - scanner: memory exposure to scripts
+ PASSED! Section 54 of test - scanner: memory exposure to scripts
+ PASSED! Section 55 of test - scanner: memory exposure to scripts
+ PASSED! Section 56 of test - scanner: memory exposure to scripts
+ PASSED! Section 57 of test - scanner: memory exposure to scripts
+ PASSED! Section 58 of test - scanner: memory exposure to scripts
+ PASSED! Section 59 of test - scanner: memory exposure to scripts
+ PASSED! Section 60 of test - scanner: memory exposure to scripts
+ PASSED! Section 61 of test - scanner: memory exposure to scripts
+ PASSED! Section 62 of test - scanner: memory exposure to scripts
+ PASSED! Section 63 of test - scanner: memory exposure to scripts
+ PASSED! Section 64 of test - scanner: memory exposure to scripts
+ PASSED! Section 65 of test - scanner: memory exposure to scripts
+ PASSED! Section 66 of test - scanner: memory exposure to scripts
+ PASSED! Section 67 of test - scanner: memory exposure to scripts
+ PASSED! Section 68 of test - scanner: memory exposure to scripts
+ PASSED! Section 69 of test - scanner: memory exposure to scripts
+ PASSED! Section 70 of test - scanner: memory exposure to scripts
+ PASSED! Section 71 of test - scanner: memory exposure to scripts
+ PASSED! Section 72 of test - scanner: memory exposure to scripts
+ PASSED! Section 73 of test - scanner: memory exposure to scripts
+ PASSED! Section 74 of test - scanner: memory exposure to scripts
+ PASSED! Section 75 of test - scanner: memory exposure to scripts
+ PASSED! Section 76 of test - scanner: memory exposure to scripts
+ PASSED! Section 77 of test - scanner: memory exposure to scripts
+ PASSED! Section 78 of test - scanner: memory exposure to scripts
+ PASSED! Section 79 of test - scanner: memory exposure to scripts
+ PASSED! Section 80 of test - scanner: memory exposure to scripts
+ PASSED! Section 81 of test - scanner: memory exposure to scripts
+ PASSED! Section 82 of test - scanner: memory exposure to scripts
+ PASSED! Section 83 of test - scanner: memory exposure to scripts
+ PASSED! Section 84 of test - scanner: memory exposure to scripts
+ PASSED! Section 85 of test - scanner: memory exposure to scripts
+ PASSED! Section 86 of test - scanner: memory exposure to scripts
+ PASSED! Section 87 of test - scanner: memory exposure to scripts
+ PASSED! Section 88 of test - scanner: memory exposure to scripts
+ PASSED! Section 89 of test - scanner: memory exposure to scripts
+ PASSED! Section 90 of test - scanner: memory exposure to scripts
+ PASSED! Section 91 of test - scanner: memory exposure to scripts
+ PASSED! Section 92 of test - scanner: memory exposure to scripts
+ PASSED! Section 93 of test - scanner: memory exposure to scripts
+ PASSED! Section 94 of test - scanner: memory exposure to scripts
+ PASSED! Section 95 of test - scanner: memory exposure to scripts
+ PASSED! Section 96 of test - scanner: memory exposure to scripts
+ PASSED! Section 97 of test - scanner: memory exposure to scripts
+ PASSED! Section 98 of test - scanner: memory exposure to scripts
+ PASSED! Section 99 of test - scanner: memory exposure to scripts
+ PASSED! Section 100 of test - scanner: memory exposure to scripts
+begin test: e4x/undefined/13.2.1.js
+ PASSED! Section 1 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 2 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 3 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 4 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 5 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 6 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 7 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 8 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 9 of test - 13.2.1 - Namespace Constructor as Function
+ PASSED! Section 10 of test - 13.2.1 - Namespace Constructor as Function
+begin test: e4x/undefined/13.2.2.js
+ PASSED! Section 1 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 2 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 3 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 4 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 5 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 6 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 7 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 8 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 9 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 10 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 11 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 12 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 13 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 14 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 15 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 16 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 17 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 18 of test - 13.2.2 - Namespace Constructor
+ PASSED! Section 19 of test - 13.2.2 - Namespace Constructor
+begin test: e4x/undefined/13.2.5.js
+ PASSED! Section 1 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 2 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 3 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 4 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 5 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 6 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 7 of test - 13.2.5 - Properties of Namespace Instances
+ PASSED! Section 8 of test - 13.2.5 - Properties of Namespace Instances
+begin test: e4x/undefined/regress-283972.js
+ PASSED! Section 1 of test - throw error when two attributes with the same local name and the same namespace
+begin test: e4x/undefined/regress-350442.js
+ FAILED! Section Section 1 of test - toXMLString with namespace definitions : Type mismatch, expected type boolean, actual type object Expected value 'false', Actual value 'TypeError: Object #<an Object> has no method 'attrWildcard''  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-444608-02.js
+begin test: e4x/undefined/regress-444608.js
+begin test: e4x/undefined/13.3.1.js
+ PASSED! Section 1 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 2 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 3 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 4 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 5 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 6 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 7 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 8 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 9 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 10 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 11 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 12 of test - 13.3.1 - QName Constructor as a Function
+ PASSED! Section 13 of test - 13.3.1 - QName Constructor as a Function
+begin test: e4x/undefined/13.3.2.js
+ PASSED! Section 1 of test - 13.3.2 - QName Constructor
+ PASSED! Section 2 of test - 13.3.2 - QName Constructor
+ PASSED! Section 3 of test - 13.3.2 - QName Constructor
+ PASSED! Section 4 of test - 13.3.2 - QName Constructor
+ PASSED! Section 5 of test - 13.3.2 - QName Constructor
+ PASSED! Section 6 of test - 13.3.2 - QName Constructor
+ PASSED! Section 7 of test - 13.3.2 - QName Constructor
+ PASSED! Section 8 of test - 13.3.2 - QName Constructor
+ PASSED! Section 9 of test - 13.3.2 - QName Constructor
+ PASSED! Section 10 of test - 13.3.2 - QName Constructor
+ PASSED! Section 11 of test - 13.3.2 - QName Constructor
+ PASSED! Section 12 of test - 13.3.2 - QName Constructor
+ PASSED! Section 13 of test - 13.3.2 - QName Constructor
+ PASSED! Section 14 of test - 13.3.2 - QName Constructor
+ PASSED! Section 15 of test - 13.3.2 - QName Constructor
+ PASSED! Section 16 of test - 13.3.2 - QName Constructor
+ PASSED! Section 17 of test - 13.3.2 - QName Constructor
+ PASSED! Section 18 of test - 13.3.2 - QName Constructor
+ PASSED! Section 19 of test - 13.3.2 - QName Constructor
+ PASSED! Section 20 of test - 13.3.2 - QName Constructor
+ PASSED! Section 21 of test - 13.3.2 - QName Constructor
+ PASSED! Section 22 of test - 13.3.2 - QName Constructor
+ PASSED! Section 23 of test - 13.3.2 - QName Constructor
+ PASSED! Section 24 of test - 13.3.2 - QName Constructor
+begin test: e4x/undefined/13.3.5.js
+ PASSED! Section 1 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 2 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 3 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 4 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 5 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 6 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 7 of test - 13.3.5 - Properties of QName Instances
+ PASSED! Section 8 of test - 13.3.5 - Properties of QName Instances
+begin test: e4x/undefined/regress-373595-03.js
+ PASSED! Section 1 of test - 13.3 QName Objects - Do not assert: op == JSOP_ADD
+begin test: e4x/undefined/regress-444608.js
+begin test: e4x/undefined/regress-263934.js
+begin test: e4x/undefined/regress-263936.js
+begin test: e4x/undefined/regress-264369.js
+ FAILED! Section Section 1 of test - toXMLString() should escape '>' : Expected value '<b>&lt;&gt;&amp;</b>', Actual value '<b>NL  &lt;&gt;&amp;NL</b>'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-271545.js
+begin test: e4x/undefined/regress-277650.js
+ FAILED! Section Section 1 of test - xml:lang attribute in XML literal : Expected value 'no error', Actual value 'error'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-277664.js
+ PASSED! Section 1 of test - duplicate attribute names
+begin test: e4x/undefined/regress-277779.js
+begin test: e4x/undefined/regress-277935.js
+ PASSED! Section 1 of test - XML("") should create empty text node
+begin test: e4x/undefined/regress-283349.js
+begin test: e4x/undefined/regress-290056.js
+begin test: e4x/undefined/regress-290499.js
+begin test: e4x/undefined/regress-301553.js
+ PASSED! Section 1 of test - E4X - Should not repress exceptions
+begin test: e4x/undefined/regress-301573.js
+ FAILED! Section Section 1 of test - E4X - Entities : Expected value '<', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - E4X - Entities : Expected value '&', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-309897.js
+ PASSED! Section 1 of test - Regression - appending elements crashes mozilla
+begin test: e4x/undefined/regress-311580.js
+begin test: e4x/undefined/regress-313799.js
+begin test: e4x/undefined/regress-321547.js
+ FAILED! Section Section 1 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 4 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-322499.js
+ PASSED! Section 1 of test - Do not define AnyName
+ PASSED! Section 2 of test - Do not define AnyName
+begin test: e4x/undefined/regress-325425.js
+ PASSED! Section 1 of test - jsxml.c: Bad assumptions about js_ConstructObject
+begin test: e4x/undefined/regress-327564.js
+begin test: e4x/undefined/regress-327691-01.js
+begin test: e4x/undefined/regress-327691-02.js
+begin test: e4x/undefined/regress-327697.js
+ PASSED! Section 1 of test - Make XPConnect refuse to wrap e4x
+begin test: e4x/undefined/regress-328249.js
+ PASSED! Section 1 of test - Crash due to infinite recursion in js_IsXMLName
+begin test: e4x/undefined/regress-331558.js
+ FAILED! Section Section 1 of test - Decompiler: Missing = in default xml namespace statement : Expected value 'function () {NL    default xml namespace = "abc";NL}', Actual value 'function () {var __defaultNamespace = __E4X.createDefaultNamespace('abc');}'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-331664.js
+ PASSED! Section 1 of test - Null pointer deref crash deleting XML methods
+begin test: e4x/undefined/regress-344455.js
+ FAILED! Section Section 1 of test - Error - tag name mismatch error message should include tag name : Expected value 'SyntaxError: XML tag name mismatch (expected foo)', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-347155.js
+ PASSED! Section 1 of test - Do not crash with deeply nested e4x literal
+begin test: e4x/undefined/regress-350206-1.js
+ FAILED! Section Section 1 of test - Order of destructuring, destructuring in the presence of exceptions : Type mismatch, expected type string, actual type object Expected value 'No crash', Actual value 'TypeError: Object #<an Object> has no method 'attrWildcard''  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-350206.js
+begin test: e4x/undefined/regress-350629.js
+ FAILED! Section Section 1 of test - .toXMLString can include invalid generated prefixes : Type mismatch, expected type boolean, actual type object Expected value 'false', Actual value 'TypeError: Object #<an Object> has no method 'attrWildcard''  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-352097.js
+ FAILED! Section Section 1 of test - Avoid adding unnecessary spaces to PIs : Type mismatch, expected type boolean, actual type object Expected value 'false', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-352103.js
+ PASSED! Section 1 of test - <??> XML initializer should generate a SyntaxError
+begin test: e4x/undefined/regress-352223.js
+ FAILED! Section Section 1 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML name', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML tag syntax', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-354145-01.js
+begin test: e4x/undefined/regress-354145-02.js
+begin test: e4x/undefined/regress-354145-03.js
+begin test: e4x/undefined/regress-354998.js
+ PASSED! Section 1 of test - prototype should not be enumerated for XML objects.
+begin test: e4x/undefined/regress-355478.js
+ FAILED! Section Section 1 of test - Do not crash with hasOwnProperty : Expected value 'TypeError: XML.prototype.hasOwnProperty called on incompatible Object', Actual value 'TypeError: Cannot read property 'length' of undefined'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-356238-01.js
+ PASSED! Section 1 of test - bug 356238
+begin test: e4x/undefined/regress-356238-02.js
+begin test: e4x/undefined/regress-369032.js
+begin test: e4x/undefined/regress-369536.js
+begin test: e4x/undefined/regress-372563.js
+ PASSED! Section 1 of test - Do not assert: ss->top >= 2
+begin test: e4x/undefined/regress-372564.js
+ PASSED! Section 1 of test - Do not assert: op == JSOP_ADD
+begin test: e4x/undefined/regress-374106.js
+begin test: e4x/undefined/regress-374112.js
+begin test: e4x/undefined/regress-374116.js
+begin test: e4x/undefined/regress-374160.js
+begin test: e4x/undefined/regress-375406.js
+begin test: e4x/undefined/regress-378492.js
+ PASSED! Section 1 of test - namespace_trace/qname_trace should check for null private, WAY_TOO_MUCH_GC
+begin test: e4x/undefined/regress-380833.js
+begin test: e4x/undefined/regress-383255.js
+ PASSED! Section 1 of test - Do not assert: JS_UPTRDIFF(fp->sp, fp->spbase) <= depthdiff
+begin test: e4x/undefined/regress-394941.js
+ FAILED! Section  : Expected match to '/InternalError: (script stack space quota is exhausted|too much recursion)/', Actual value 'RangeError: Maximum call stack size exceeded'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-407323.js
+ PASSED! Section 1 of test - XML, XMLList, QName are mutable, Namespace is not.
+begin test: e4x/undefined/regress-426520.js
+ PASSED! Section 1 of test - Do not crash @ ParseXMLSource
+begin test: e4x/undefined/regress-453915.js
+ PASSED! Section 1 of test - XML Injection possible via default xml namespace
+begin test: e4x/undefined/regress-458679-01.js
+ PASSED! Section 1 of test - GetXMLEntity should not assume FastAppendChar is infallible
+begin test: e4x/undefined/regress-458679-02.js
+ PASSED! Section 1 of test - GetXMLEntity should not assume FastAppendChar is infallible
+begin test: e4x/undefined/regress-460180.js
+ PASSED! Section 1 of test - Do not crash with if (false || false || <x/>) {}
+begin test: e4x/undefined/regress-465063.js
+begin test: e4x/undefined/regress-470619.js
+ PASSED! Section 1 of test - Do not assert: regs.sp - 2 >= StackBase(fp)
+begin test: e4x/undefined/regress-473709.js
+ PASSED! Section 1 of test - Do not assert: cursor == (uint8 *)copy->messageArgs[0] + argsCopySize
+begin test: e4x/undefined/regress-477053.js
+ PASSED! Section 1 of test - Do not assert: JSVAL_IS_STRING(v)
+begin test: e4x/undefined/12.2.js
+begin test: e4x/undefined/10.3.1.js
+begin test: e4x/undefined/10.3.js
+begin test: e4x/undefined/10.4.1.js
+ FAILED! Section Section 1 of test - 10.4.1 - toXMLList Applied to String type : Expected value 'xml', Actual value 'object'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 10.4.1 - toXMLList Applied to String type : Expected value '<alpha>one</alpha>NL<bravo>two</bravo>', Actual value '<alpha>NL  oneNL</alpha>NL<bravo>NL  twoNL</bravo>'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/10.4.js
+ PASSED! Section 1 of test - 10.4 - toXMLList
+begin test: e4x/undefined/regress-302097.js
+ FAILED! Section Section 1 of test - E4X - Function.prototype.toString should not quote {} attribute values : Expected value 'function f(k) {NL    return &lt;xml k={k}/>;NL}', Actual value 'function f(k) {NL  return (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "xml", "close": void 0, "attributes": {"keys": ["k"], "vals": [{"type": 3, "value": k}]}, "content": void 0}));}'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/9.1.1.1.js
+ FAILED! Section Section 1 of test - 9.1.1.1 XML [[Get]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 9.1.1.1 XML [[Get]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/9.1.1.2.js
+ FAILED! Section Section 1 of test - 9.1.1.2 - XML [[Put]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/9.1.1.3.js
+begin test: e4x/undefined/9.1.1.6.js
+ FAILED! Section Section 1 of test - 9.1.1.6 - XML [[HasProperty]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 9.1.1.6 - XML [[HasProperty]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 9.1.1.6 - XML [[HasProperty]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 4 of test - 9.1.1.6 - XML [[HasProperty]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 5 of test - 9.1.1.6 - XML [[HasProperty]]
+ PASSED! Section 6 of test - 9.1.1.6 - XML [[HasProperty]]
+ PASSED! Section 7 of test - 9.1.1.6 - XML [[HasProperty]]
+ PASSED! Section 8 of test - 9.1.1.6 - XML [[HasProperty]]
+ PASSED! Section 9 of test - 9.1.1.6 - XML [[HasProperty]]
+ PASSED! Section 10 of test - 9.1.1.6 - XML [[HasProperty]]
+begin test: e4x/undefined/9.2.1.1.js
+ PASSED! Section 1 of test - 9.2.1.1 XMLList [[Get]]
+ PASSED! Section 2 of test - 9.2.1.1 XMLList [[Get]]
+begin test: e4x/undefined/9.2.1.2.js
+ FAILED! Section Section 1 of test - 9.2.1.2 - XMLList [[Put]] : Expected value '<alpha>one</alpha>NL<bravo>two</bravo>', Actual value '<alpha>NL  oneNL</alpha>NL<bravo>NL  twoNL</bravo>'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/9.2.1.8.js
+begin test: e4x/undefined/9.2.1.9.js
+begin test: e4x/undefined/13.4.1.js
+begin test: e4x/undefined/13.4.2.js
+begin test: e4x/undefined/13.4.3.10.js
+ PASSED! Section 1 of test - 13.4.3.10 - XML Constructor [[HasInstance]]
+ PASSED! Section 2 of test - 13.4.3.10 - XML Constructor [[HasInstance]]
+begin test: e4x/undefined/13.4.4.10.js
+ FAILED! Section Section 1 of test - 13.4.4.10 - XML contains() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.11.js
+ FAILED! Section Section 1 of test - 13.4.4.11 - XML copy() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.12.js
+ FAILED! Section Section 1 of test - 13.4.4.12 - XML descendants : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.13.js
+ FAILED! Section Section 1 of test - 13.4.4.14 - XML elements() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.14.js
+ FAILED! Section Section 1 of test - 13.4.4.14 - XML hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.4.4.14 - XML hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.4.4.14 - XML hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 4 of test - 13.4.4.14 - XML hasOwnProperty()
+ FAILED! Section Section 5 of test - 13.4.4.14 - XML hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 6 of test - 13.4.4.14 - XML hasOwnProperty()
+begin test: e4x/undefined/13.4.4.15.js
+ FAILED! Section Section 1 of test - 13.4.4.15 - hasComplexContent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.16.js
+ FAILED! Section Section 1 of test - 13.4.4.16 - XML hasSimpleContent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.17.js
+ FAILED! Section Section 1 of test - 13.4.4.17 - XML inScopeNamespaces() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.18.js
+ FAILED! Section Section 1 of test - 13.4.4.18 - XML insertChildAfter() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.19.js
+ FAILED! Section Section 1 of test - 13.4.4.19 - insertChildBefore() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.2.js
+ FAILED! Section Section 1 of test - 13.4.4.2 - XML addNamespace() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.20.js
+ FAILED! Section Section 1 of test - 13.4.4.20 - XML length() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.24.js
+ FAILED! Section Section 1 of test - 13.4.4.24 - XML namespaceDeclarations() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.25.js
+ FAILED! Section Section 1 of test - 13.4.4.25 - XML nodeKind() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.26.js
+ FAILED! Section Section 1 of test - 13.4.4.26 - XML normalize() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.27.js
+ FAILED! Section Section 1 of test - 13.4.4.27 - XML parent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.3-01.js
+begin test: e4x/undefined/13.4.4.3-02.js
+ PASSED! Section 1 of test - 13.4.4.3 - XML.appendChild should copy child
+begin test: e4x/undefined/13.4.4.30.js
+ FAILED! Section Section 1 of test - 13.4.4.30 - propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.4.4.30 - propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.4.4.30 - propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 5 of test - 13.4.4.30 - propertyIsEnumerable()
+ PASSED! Section 6 of test - 13.4.4.30 - propertyIsEnumerable()
+ PASSED! Section 7 of test - 13.4.4.30 - propertyIsEnumerable()
+ PASSED! Section 8 of test - 13.4.4.30 - propertyIsEnumerable()
+begin test: e4x/undefined/13.4.4.31.js
+ FAILED! Section Section 1 of test - 13.4.4.31 - XML removeNamespace() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.32-01.js
+begin test: e4x/undefined/13.4.4.32.js
+ FAILED! Section Section 1 of test - 13.4.4.32 - XML replace() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.34.js
+ FAILED! Section Section 1 of test - 13.4.4.34 - XML setLocalName() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.35.js
+ FAILED! Section Section 1 of test - 13.4.4.35 - setName : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.36.js
+ FAILED! Section Section 1 of test - 13.4.4.36 - setNamespace : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.37.js
+ FAILED! Section Section 1 of test - 13.4.4.37 - XML text() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.38.js
+ FAILED! Section Section 1 of test - 13.4.4.38 - XML toString() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.4.4.38 - XML toString() : Expected value 'one', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.39.js
+ PASSED! Section 1 of test - 13.4.4.39 - XML toXMLString
+ PASSED! Section 2 of test - 13.4.4.39 - XML toXMLString
+begin test: e4x/undefined/13.4.4.40.js
+ FAILED! Section Section 1 of test - 13.4.4.40 - valueOf : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 2 of test - 13.4.4.40 - valueOf
+ PASSED! Section 3 of test - 13.4.4.40 - valueOf
+begin test: e4x/undefined/13.4.4.6.js
+ FAILED! Section Section 1 of test - 13.4.4.6 - XML child() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.4.4.8.js
+ FAILED! Section Section 1 of test - 13.4.4.8 - XML children() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-291930.js
+ PASSED! Section 1 of test - If document starts with comment, document is discarded
+begin test: e4x/undefined/regress-324422-1.js
+ FAILED! Section Section 1 of test - Do not crash creating XML object with long initialiser : Expected value 'InternalError: script stack space quota is exhausted', Actual value 'ReferenceError: xml is not defined'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/regress-324688.js
+ PASSED! Section 1 of test - No Syntax Error when trailing space and XML.ignoreWhitespace true
+begin test: e4x/undefined/13.5.1.js
+ FAILED! Section Section 1 of test - 13.5.1 - XMLList Constructor as Function : Expected value 'xml', Actual value 'undefined'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.5.1 - XMLList Constructor as Function : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.5.1 - XMLList Constructor as Function : Expected value 'false', Actual value 'true'  of test - 
+ FAILED! undefined
+ PASSED! Section 4 of test - 13.5.1 - XMLList Constructor as Function
+begin test: e4x/undefined/13.5.2.js
+ FAILED! Section Section 1 of test - 13.5.2 - XMLList Constructor : Expected value 'xml', Actual value 'object'  of test - 
+ FAILED! undefined
+ PASSED! Section 2 of test - 13.5.2 - XMLList Constructor
+ FAILED! Section Section 3 of test - 13.5.2 - XMLList Constructor : Expected value '<alpha>one</alpha>NL<bravo>two</bravo>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.10.js
+ FAILED! Section Section 1 of test - 13.5.4.10 - XMLList elements() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.11.js
+ FAILED! Section Section 1 of test - 13.5.4.11 - XMLList hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.5.4.11 - XMLList hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.5.4.11 - XMLList hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 4 of test - 13.5.4.11 - XMLList hasOwnProperty()
+ FAILED! Section Section 5 of test - 13.5.4.11 - XMLList hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 5 of test - 13.5.4.11 - XMLList hasOwnProperty() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ PASSED! Section 6 of test - 13.5.4.11 - XMLList hasOwnProperty()
+begin test: e4x/undefined/13.5.4.12.js
+ FAILED! Section Section 1 of test - 13.5.4.12 - XMLList hasComplexContent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.13.js
+ FAILED! Section Section 1 of test - 13.5.4.13 - XMLList hasSimpleContent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.14.js
+ FAILED! Section Section 1 of test - 13.5.4.14 - XMLList length() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.15.js
+ FAILED! Section Section 1 of test - 13.5.4.15 - XMLList normalize() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.16.js
+ FAILED! Section Section 1 of test - 13.5.4.16 - XMLList parent() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.17.js
+ FAILED! Section Section 1 of test - 13.5.4.17 - XMLList processingInstructions() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.18.js
+ FAILED! Section Section 1 of test - 13.5.4.18 - XMLList propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.19.js
+ FAILED! Section Section 1 of test - 13.5.4.19 - XMLList text() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.2.js
+ FAILED! Section Section 1 of test - 13.5.4.2 - XMLList attribute() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.20.js
+ FAILED! Section Section 1 of test - 13.5.4.20 - XMLList toString() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.5.4.20 - XMLList toString() : Expected value 'one', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.5.4.20 - XMLList toString() : Expected value '<alpha>one</alpha>NL<bravo>two</bravo>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.21.js
+ FAILED! Section Section 1 of test - 13.5.4.21 - XMLList toXMLString() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 13.5.4.21 - XMLList toXMLString() : Expected value '<alpha>one</alpha>', Actual value '<alpha>NL  oneNL</alpha>'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 3 of test - 13.5.4.21 - XMLList toXMLString() : Expected value '<alpha>one</alpha>NL<bravo>two</bravo>', Actual value '<alpha>NL  oneNL</alpha>NL<bravo>NL  twoNL</bravo>'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.22.js
+ FAILED! Section Section 1 of test - 13.5.4.22 - XMLList valueOf() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.3.js
+ FAILED! Section Section 1 of test - 13.5.4.3 - XMLList attributes() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.4.js
+ FAILED! Section Section 1 of test - 13.5.4.4 - XMLList child() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.5.js
+ FAILED! Section Section 1 of test - 13.5.4.5 - XMLList children() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.6.js
+ FAILED! Section Section 1 of test - 13.5.4.6 - XMLList comments() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.7.js
+ FAILED! Section Section 1 of test - 13.5.4.7 - XMLList contains() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+begin test: e4x/undefined/13.5.4.8.js
+ FAILED! Section Section 1 of test - 13.5.4.8 - XMLList copy() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
