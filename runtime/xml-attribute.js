@@ -38,4 +38,3 @@ extend(XMLChild, XMLAttribute, {
     return escapeAttributeValue(this._value);
   },
 });
-

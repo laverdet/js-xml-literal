@@ -170,7 +170,7 @@ begin test: e4x/undefined/regress-450871-02.js
 begin test: e4x/undefined/regress-462734-01.js
  PASSED! Section 1 of test - Do not assert: pobj_ == obj2
 begin test: e4x/undefined/regress-280844-1.js
- FAILED! TypeError: Object #<an XML> has no method 'appendChild'
+ FAILED! ReferenceError: gc is not defined
 begin test: e4x/undefined/regress-280844-2.js
  FAILED! TypeError: Object #<an XML> has no method 'addNamespace'
 begin test: e4x/undefined/regress-313952-01.js
@@ -447,9 +447,9 @@ begin test: e4x/undefined/regress-325425.js
 begin test: e4x/undefined/regress-327564.js
  FAILED! TypeError: Object #<an XML> has no method 'insertChildBefore'
 begin test: e4x/undefined/regress-327691-01.js
- FAILED! TypeError: Cannot read property 'h' of undefined
+ FAILED! TypeError: Object #<an XML> has no method '_deepCopy'
 begin test: e4x/undefined/regress-327691-02.js
- FAILED! TypeError: Cannot read property 'h' of undefined
+ FAILED! TypeError: Object #<an XML> has no method '_deepCopy'
 begin test: e4x/undefined/regress-327697.js
  PASSED! Section 1 of test - Make XPConnect refuse to wrap e4x
 begin test: e4x/undefined/regress-328249.js
@@ -469,7 +469,7 @@ begin test: e4x/undefined/regress-350206-1.js
  FAILED! Section Section 1 of test - Order of destructuring, destructuring in the presence of exceptions : Type mismatch, expected type string, actual type object Expected value 'No crash', Actual value 'TypeError: Object #<an Object> has no method 'attrWildcard''  of test - 
  FAILED! undefined
 begin test: e4x/undefined/regress-350206.js
- FAILED! TypeError: Object #<an XML> has no method 'appendChild'
+ FAILED! TypeError: Object #<an XML> has no method '_addInScopeNamespace'
 begin test: e4x/undefined/regress-350629.js
  FAILED! Section Section 1 of test - .toXMLString can include invalid generated prefixes : Type mismatch, expected type boolean, actual type object Expected value 'false', Actual value 'TypeError: Object #<an Object> has no method 'attrWildcard''  of test - 
  FAILED! undefined
@@ -502,11 +502,13 @@ begin test: e4x/undefined/regress-355478.js
 begin test: e4x/undefined/regress-356238-01.js
  PASSED! Section 1 of test - bug 356238
 begin test: e4x/undefined/regress-356238-02.js
- FAILED! TypeError: Cannot read property 'a' of undefined
+ FAILED! TypeError: Cannot read property '0' of undefined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-356238-03.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-364017.js
 begin test: e4x/undefined/regress-369032.js
- FAILED! TypeError: Cannot call method '_put' of undefined
+ FAILED! Section Section 1 of test - Do not assert: kid2->parent == xml || !kid2->parent : Expected value '<y>NL  <b>5</b>NL</y>', Actual value '<y><b>NL  5NL</b></y>'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Cannot call method 'toXMLString' of undefined
 begin test: e4x/undefined/regress-369536.js
  FAILED! ReferenceError: xml is not defined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-369740.js
@@ -704,13 +706,14 @@ begin test: e4x/undefined/13.4.4.26.js
 begin test: e4x/undefined/13.4.4.27.js
  FAILED! Section Section 1 of test - 13.4.4.27 - XML parent() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
- FAILED! TypeError: Cannot call method 'parent' of undefined
+ FAILED! TypeError: Object #<an XML> has no method 'parent'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.28.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.29.js
 begin test: e4x/undefined/13.4.4.3-01.js
  FAILED! TypeError: Object #<an XML> has no method 'setChildren'
 begin test: e4x/undefined/13.4.4.3-02.js
- PASSED! Section 1 of test - 13.4.4.3 - XML.appendChild should copy child
+ FAILED! Section Section 1 of test - 13.4.4.3 - XML.appendChild should copy child : Expected value 'error', Actual value 'no error'  of test - 
+ FAILED! undefined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.3.js
 begin test: e4x/undefined/13.4.4.30.js
  FAILED! Section Section 1 of test - 13.4.4.30 - propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 

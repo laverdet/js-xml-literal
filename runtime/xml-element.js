@@ -270,4 +270,9 @@ extend(XMLChild, XMLElement, {
     s += this._name.localName + '>';
     return s;
   },
+
+  // 13.4.4.3 XML.prototype.appendChild ( child )
+  appendChild: function(child) {
+    this._content.push(child);
+  },
 });

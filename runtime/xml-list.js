@@ -197,6 +197,10 @@ extend(XML, XMLList, {
     return ret;
   },
 
+  // 13.4.4.3 XML.prototype.appendChild ( child )
+  appendChild: function(child) {
+    this._content.push(child);
+  },
 });
 
 XMLList._ctor = extend(XMLList, function(targetObject, targetProperty, elements) {

@@ -22,6 +22,10 @@ function XML(value) {
 }
 
 extend(null, XML, {
+  // 13.4.4.3 XML.prototype.appendChild ( child )
+  // See: XMLElement & XMLList for implementations
+  appendChild: function(child) {},
+
   // 13.4.4.39 XML.prototype.toXMLString ()
   toXMLString: function() {
     return this._toXMLString({'': ''}, 0);

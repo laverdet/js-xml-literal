@@ -746,12 +746,18 @@ class XMLDesugarWalker : public NodeWalker {
       XMLDesugarWalker& left_ret = cast<XMLDesugarWalker>(ret_vector[0]);
       if (left_ret.var_data.declared_xml || left_ret.var_data.implied_xml) {
         NodeWalker* top = parent();
+        NodeWalker* next = this;
         while (dynamic_cast<NodeParenthetical*>(top->node())) {
+          next = top;
           top = top->parent();
         }
         if (dynamic_cast<NodeFunctionCall*>(top->node())) {
           // If this member expression is being invoked in the context of a function call we skip
           // this rewrite step.
+          // i.e.:
+          // foo.bar.toXMLString()
+          // should not become:
+          // foo.bar._get('toXMLString')()
           if (dynamic_cast<NodeStaticMemberExpression*>(&node)) {
             // Some methods will return XML, some will not. Attempt to figure out if this will be
             // XML.
@@ -764,8 +770,17 @@ class XMLDesugarWalker : public NodeWalker {
             }
           }
           return;
-        } else if (dynamic_cast<NodeAssignment*>(top->node())) {
+        } else if (dynamic_cast<NodeAssignment*>(top->node()) &&
+            top->node()->childNodes().front() == next->node()) {
           // Also skip the rewrite if this is beign used for an assignment expression.
+          // Don't turn:
+          //   foo.bar = 5
+          // into:
+          //   foo._get('bar') = 5
+          // This will be handled in NodeAssignment. However, be sude to turn:
+          //   etc = foo.bar
+          // into:
+          //   etc = foo._get('bar')
           var_data = left_ret.var_data;
           return;
         }
