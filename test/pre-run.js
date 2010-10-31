@@ -2,7 +2,7 @@
 
 // Print w/ new line
 function print(str) {
-  require('sys').print(str+'\n');
+  require('util').print(str+'\n');
 }
 
 // Hook reportCompare to handle XML

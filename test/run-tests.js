@@ -11,7 +11,7 @@ mozilla-1.9.2/js/src/tests/shell.js
 var
   fs = require('fs'),
   path = require('path'),
-  sys = require('sys'),
+  util = require('util'),
   spawn = require('child_process').spawn;
 
 function beget(obj) {
@@ -56,13 +56,13 @@ if (argv[0] === '-s') {
       try {
         test = new Script(desugar(code[ii]), files[ii]);
       } catch(e) {
-        sys.print(' FAILED! Failed to compile ' + files[ii] + '\n');
-        sys.print(e + '\n');
+        util.print(' FAILED! Failed to compile ' + files[ii] + '\n');
+        util.print(e + '\n');
       }
       try {
         test.runInThisContext();
       } catch(e) {
-        sys.print(' FAILED! ' + e.stack + '\n');
+        util.print(' FAILED! ' + e.stack + '\n');
       }
     }
   }
@@ -110,16 +110,16 @@ if (argv[0] === '-s') {
       proc = spawn.apply(null, pending.shift());
 
       proc.stdout.on('data', function(data) {
-        sys.print(data);
+        util.print(data);
       });
 
       proc.stderr.on('data', function(data) {
-        sys.print(data);
+        util.print(data);
       });
 
       proc.on('exit', function(code) {
         if (code) {
-          sys.print('exited with code ' + code + '\n');
+          util.print('exited with code ' + code + '\n');
         }
         proc = null;
         runCommand();

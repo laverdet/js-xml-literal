@@ -4,8 +4,8 @@ var namespace = require('./namespace'), qname = require('./qname'), etc = requir
     safeInvoke = require('./safe-invoke'), desugar = require('e4x-bump').desugar;
 
 /** TODO: DELETE THIS! LAZY!! */
-global.print = require('sys').print;
-global.inspect = require('sys').inspect;
+global.print = require('util').print;
+global.inspect = require('util').inspect;
 global.dump = function(a) {
   print(inspect(a) + '\n');
 }
