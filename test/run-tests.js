@@ -56,10 +56,14 @@ if (argv[0] === '-s') {
       try {
         test = new Script(desugar(code[ii]), files[ii]);
       } catch(e) {
-        sys.print('Error compiling ' + files[ii] + '\n');
+        sys.print(' FAILED! Failed to compile ' + files[ii] + '\n');
         sys.print(e + '\n');
       }
-      test.runInThisContext();
+      try {
+        test.runInThisContext();
+      } catch(e) {
+        sys.print(' FAILED! ' + e.stack + '\n');
+      }
     }
   }
 } else {
