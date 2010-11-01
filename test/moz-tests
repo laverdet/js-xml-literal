@@ -5,7 +5,8 @@ begin test: e4x/undefined/regress-349815.js
  PASSED! Section 1 of test - decompilation of parameterized e4x xmllist literal
  PASSED! Section 1 of test - decompilation of parameterized e4x xmllist literal: compile actual
 begin test: e4x/undefined/regress-349822.js
- FAILED! SyntaxError: SyntaxError on line 1: syntax error, unexpected t_IDENTIFIER, expecting t_SEMICOLON or t_VIRTUAL_SEMICOLON or t_COMMA
+ PASSED! Section 1 of test - decompilation of x.@[2]
+ PASSED! Section 1 of test - decompilation of x.@[2]: compile actual
 begin test: e4x/undefined/regress-349956.js
  PASSED! Section 1 of test - decompilation of <x/>.@*
  PASSED! Section 1 of test - decompilation of <x/>.@*: compile actual
@@ -13,7 +14,7 @@ begin test: e4x/undefined/regress-350226.js
  PASSED! Section 1 of test - decompilation of <x/>.@[*]
  PASSED! Section 1 of test - decompilation of <x/>.@[*]: compile actual
 begin test: e4x/undefined/regress-350531.js
- FAILED! Section Section 1 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) == " b "; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) == ' b '; } ) ;'  of test - 
+ FAILED! Section Section 1 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) . _equals ( " b " ) ; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) == ' b '; } ) ;'  of test - 
  FAILED! undefined
  PASSED! Section 1 of test - decompilation of function (){ return (@['a'])=='b'}: compile actual
  FAILED! Section Section 2 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) . toXMLString ( ) ; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) . toXMLString ( ) ; } ) ;'  of test - 
@@ -22,16 +23,19 @@ begin test: e4x/undefined/regress-350531.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-351706.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-351988.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-352013.js
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-352459.js
+begin test: e4x/undefined/regress-352459.js
+ FAILED! Section Section 1 of test - decompilation for 4..@x++ : Expected value ' ( function ( ) { return __E4X . _get ( ( 4 ) , __E4X . attrIdentifier ( " x " ) ) ++; } ) ;', Actual value ' ( function ( ) { return __E4X . _get ( 4 , __E4X . attrIdentifier ( " x " ) ) ++; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - decompilation for 4..@x++: compile actual
 begin test: e4x/undefined/regress-352649.js
  FAILED! Section Section 1 of test - decompilation of e4x literal after |if| block : Expected value ' ( function ( ) { if ( g ) { p ; } ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : " x " , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) . _get ( " i " ) ; } ) ;', Actual value ' ( function ( ) { if ( g ) { p ; } ( ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : " x " , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) . _get ( " i " ) ) ; } ) ;'  of test - 
  FAILED! undefined
  PASSED! Section 1 of test - decompilation of e4x literal after |if| block: compile actual
 begin test: e4x/undefined/regress-352789.js
- FAILED! Section Section 1 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return new ( a ( ) . __E4X . attrIdentifier ( " z " ) ) ( ) ; } ) ;', Actual value ' ( function ( ) { return new ( a ( ) ) . __E4X . attrIdentifier ( " z " ) ( ) ; } ) ;'  of test - 
+ FAILED! Section Section 1 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return new ( __E4X . _get ( a ( ) , __E4X . attrIdentifier ( " z " ) ) ) ( ) ; } ) ;', Actual value ' ( function ( ) { return new __E4X . _get ( ( a ( ) ) , __E4X . attrIdentifier ( " z " ) ) ( ) ; } ) ;'  of test - 
  FAILED! undefined
  PASSED! Section 1 of test - Decompilation of new and .@: compile actual
- FAILED! Section Section 2 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return ( new a ) . __E4X . attrIdentifier ( " z " ) ; } ) ;', Actual value ' ( function ( ) { return new a . __E4X . attrIdentifier ( " z " ) ; } ) ;'  of test - 
+ FAILED! Section Section 2 of test - Decompilation of new and .@ : Expected value ' ( function ( ) { return __E4X . _get ( ( new a ) , __E4X . attrIdentifier ( " z " ) ) ; } ) ;', Actual value ' ( function ( ) { return __E4X . _get ( new a , __E4X . attrIdentifier ( " z " ) ) ; } ) ;'  of test - 
  FAILED! undefined
  PASSED! Section 2 of test - Decompilation of new and .@: compile actual
  PASSED! Section 3 of test - Decompilation of new and .@
@@ -179,7 +183,7 @@ begin test: e4x/undefined/regress-313952-01.js
 begin test: e4x/undefined/regress-324117.js
  FAILED! TypeError: Object #<an XML> has no method 'addNamespace'
 begin test: e4x/undefined/regress-339785.js
- FAILED! Section Section 1 of test - scanner: memory exposure to scripts : Expected value 'unknown XML entity a', Actual value 'Unexpected token <'  of test - 
+ FAILED! Section Section 1 of test - scanner: memory exposure to scripts : Expected value 'unknown XML entity a', Actual value 'SyntaxError on line 1: invalid entity'  of test - 
  FAILED! undefined
  PASSED! Section 1 of test - scanner: memory exposure to scripts
  PASSED! Section 2 of test - scanner: memory exposure to scripts
@@ -461,8 +465,7 @@ begin test: e4x/undefined/regress-331558.js
 begin test: e4x/undefined/regress-331664.js
  PASSED! Section 1 of test - Null pointer deref crash deleting XML methods
 begin test: e4x/undefined/regress-344455.js
- FAILED! Section Section 1 of test - Error - tag name mismatch error message should include tag name : Expected value 'SyntaxError: XML tag name mismatch (expected foo)', Actual value 'SyntaxError: Unexpected token <'  of test - 
- FAILED! undefined
+ PASSED! Section 1 of test - Error - tag name mismatch error message should include tag name
 begin test: e4x/undefined/regress-347155.js
  PASSED! Section 1 of test - Do not crash with deeply nested e4x literal
 begin test: e4x/undefined/regress-350206-1.js
@@ -479,9 +482,9 @@ begin test: e4x/undefined/regress-352097.js
 begin test: e4x/undefined/regress-352103.js
  PASSED! Section 1 of test - <??> XML initializer should generate a SyntaxError
 begin test: e4x/undefined/regress-352223.js
- FAILED! Section Section 1 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML name', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! Section Section 1 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML name', Actual value 'SyntaxError: SyntaxError on line 1: syntax error, unexpected t_XML_WHITESPACE, expecting t_LCURLY or t_XML_NAME_FRAGMENT or t_GREATER_THAN'  of test - 
  FAILED! undefined
- FAILED! Section Section 2 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML tag syntax', Actual value 'SyntaxError: Unexpected token <'  of test - 
+ FAILED! Section Section 2 of test - Reject invalid spaces in tags : Expected value 'SyntaxError: invalid XML tag syntax', Actual value 'SyntaxError: SyntaxError on line 1: syntax error, unexpected t_XML_WHITESPACE, expecting t_LCURLY or t_XML_NAME_FRAGMENT'  of test - 
  FAILED! undefined
 begin test: e4x/undefined/regress-354145-01.js
  FAILED! TypeError: Cannot read property 'length' of undefined

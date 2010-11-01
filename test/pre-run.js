@@ -5,10 +5,16 @@ function print(str) {
   require('util').print(str+'\n');
 }
 
-// Hook reportCompare to handle XML
-if (this.reportCompare && !this.reportCompareHooked) {
-  reportCompareHooked = true;
-  reportCompare = function(reportCompare) {
+// Hooks
+var hooks = {
+  eval: function(eval) {
+    var desugar = require('e4x-bump').desugar;
+    return function(src) {
+      return eval(desugar(src));
+    }
+  },
+
+  reportCompare: function(reportCompare) {
     return function(expected, actual, description) {
       if (expected instanceof XML && actual instanceof XML) {
         return reportCompare(true, XML(expected) == XML(actual), description);
@@ -16,13 +22,9 @@ if (this.reportCompare && !this.reportCompareHooked) {
         return reportCompare(expected, actual, description);
       }
     };
-  }(reportCompare);
-}
+  },
 
-// Hook compareSource to desugar both sources first
-if (this.compareSource && !this.compareSourceHooked) {
-  compareSourceHooked = true;
-  compareSource = function(compareSource) {
+  compareSource: function(compareSource) {
     var desugar = require('e4x-bump').desugar;
     function desugarLoose(src) {
       try {
@@ -34,5 +36,13 @@ if (this.compareSource && !this.compareSourceHooked) {
     return function(expected, actual, description) {
       return compareSource(desugarLoose(expected), desugarLoose(actual), description);
     };
-  }(compareSource);
+  },
+};
+
+// Make hooks
+for (var ii in hooks) {
+  if (this[ii] && !this['hooked' + ii]) {
+    this['hooked' + ii] = true;
+    this[ii] = hooks[ii](this[ii]);
+  }
 }

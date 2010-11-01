@@ -744,7 +744,9 @@ class XMLDesugarWalker : public NodeWalker {
     virtual void visitMemberExpression(Node& node) {
       ptr_vector ret_vector(visitChildren());
       XMLDesugarWalker& left_ret = cast<XMLDesugarWalker>(ret_vector[0]);
-      if (left_ret.var_data.declared_xml || left_ret.var_data.implied_xml) {
+      if (left_ret.var_data.implied_xml ||
+          (dynamic_cast<NodeStaticMemberExpression*>(&node) &&
+            cast<XMLDesugarWalker>(ret_vector[1]).var_data.implied_xml)) {
         NodeWalker* top = parent();
         NodeWalker* next = this;
         while (dynamic_cast<NodeParenthetical*>(top->node())) {
@@ -948,6 +950,7 @@ class XMLDesugarWalker : public NodeWalker {
         // Always a wild card: foo.@*
         replace(runtime_fn("attrWildcard", 0));
       }
+      var_data.set_declared_xml();
     }
 
     virtual void visit(NodeDynamicAttributeIdentifier& node) {
@@ -957,6 +960,7 @@ class XMLDesugarWalker : public NodeWalker {
       visitChildren();
       Node* expr = node.removeChild(node.childNodes().begin());
       replace(runtime_fn("attrIdentifier", 1, expr));
+      var_data.set_declared_xml();
     }
 
     virtual void visit(NodeDescendantExpression& node) {
