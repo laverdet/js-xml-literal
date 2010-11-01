@@ -37,5 +37,9 @@ for (var ii in safeInvoke) {
 
 // Let the client decide what file extensions to register
 this.register = function(ext) {
-  require.registerExtension('.' + ext, desugar);
+  var fs = require('fs');
+  require.extensions['.' + ext] = function(module, filename) {
+    var src = fs.readFileSync(filename, 'utf8');
+    module._compile(desugar(src), filename);
+  }
 }

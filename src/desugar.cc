@@ -449,6 +449,7 @@ class XMLDesugarWalker : public NodeWalker {
   private:
     bool requires_tmp;
     bool requires_tmp2;
+    int* for_each_count;
     vd_map_t* vars;
     XMLDesugarWalker* scope;
     VarData var_data;
@@ -540,6 +541,13 @@ class XMLDesugarWalker : public NodeWalker {
       scope->requires_tmp2 = true;
       return new NodeIdentifier("__E4XTMP2");
     }
+    Node* tmp_varN() {
+      // doesn't get automatically declared
+      char buf[16];
+      sprintf(buf, "__E4XFETMP%x", *for_each_count);
+      ++*for_each_count;
+      return new NodeIdentifier(buf);
+    }
 
     /**
      * A bunch of expressions together in ()'s with commas in between
@@ -568,6 +576,8 @@ class XMLDesugarWalker : public NodeWalker {
 
     Node* walk(NodeProgram* node) {
       vd_map_t my_vars(XMLVarAnalysis::scrapeVarData(*node));
+      auto_ptr<int> my_for_each_count(new int(0));
+      for_each_count = my_for_each_count.get();
       vars = &my_vars;
       scope = this;
       return NodeWalker::walk(node);
@@ -822,6 +832,48 @@ class XMLDesugarWalker : public NodeWalker {
       }
     }
 
+    virtual void visit(NodeForEachIn& node) {
+      // for each (var ii in foo) {}
+      // becomes
+      // var tmp1 = foo; for (var tmp2 in tmp1) { var ii = tmp1[tmp2]; }
+      Node* iterator = node.removeChild(node.childNodes().begin());
+      Node* iterexpr = node.removeChild(node.childNodes().begin());
+      Node* action = node.removeChild(node.childNodes().begin());
+      Node* iterator_var = tmp_varN();
+      Node* iterexpr_var = tmp_varN();
+      Node* iterator_forward;
+
+      if (dynamic_cast<NodeVarDeclaration*>(iterator)) {
+        // var ii -> var ii = tmp1[tmp2];
+        iterator_forward = iterator;
+        iterator_forward->replaceChild((new NodeAssignment(ASSIGN))
+          ->appendChild(iterator_forward->childNodes().front())
+          ->appendChild((new NodeDynamicMemberExpression)
+            ->appendChild(iterexpr_var)
+            ->appendChild(iterator_var)),
+          iterator_forward->childNodes().begin());
+      } else {
+        // ii -> ii = tmp1[tmp2];
+        iterator_forward = (new NodeAssignment(ASSIGN))
+          ->appendChild(iterator_forward)
+          ->appendChild((new NodeDynamicMemberExpression)
+            ->appendChild(iterexpr_var)
+            ->appendChild(iterator_var));
+      }
+
+      replace((new NodeStatementList)
+        ->appendChild((new NodeVarDeclaration)
+          ->appendChild((new NodeAssignment(ASSIGN))
+            ->appendChild(iterexpr_var->clone())
+            ->appendChild(iterexpr)))
+        ->appendChild((new NodeForIn)
+          ->appendChild((new NodeVarDeclaration)->appendChild(iterator_var->clone()))
+          ->appendChild(iterexpr_var->clone())
+          ->appendChild((new NodeStatementList)
+            ->appendChild(iterator_forward)
+            ->appendChild(action))));
+    }
+
     virtual void visit(NodeXMLDefaultNamespace& node) {
       // Memoize this in a local variable
       replace((new NodeVarDeclaration)
@@ -960,6 +1012,26 @@ class XMLDesugarWalker : public NodeWalker {
       visitChildren();
       Node* expr = node.removeChild(node.childNodes().begin());
       replace(runtime_fn("attrIdentifier", 1, expr));
+      var_data.set_declared_xml();
+    }
+
+    virtual void visit(NodeFilteringPredicate& node) {
+      // foo.(true)
+      // becomes:
+      // foo._filter(function() { return true; })
+      //
+      // Note: This is quite an incomplete implementation. A lot of work will have to go into
+      // simulating an augmented scope chain. This construct is essentially a with(){} block in
+      // sheep's clothing.
+      visitChildren();
+      Node* left = node.removeChild(node.childNodes().begin());
+      Node* right = node.removeChild(node.childNodes().begin());
+      right = (new NodeFunctionExpression)
+        ->appendChild(NULL)
+        ->appendChild(new NodeArgList)
+        ->appendChild((new NodeStatementWithExpression(RETURN))
+          ->appendChild(right));
+      replace(method_call(left, "_filter", 1, right));
       var_data.set_declared_xml();
     }
 

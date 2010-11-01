@@ -20,7 +20,12 @@ begin test: e4x/undefined/regress-350531.js
  FAILED! Section Section 2 of test - decompilation of function (){ return (@['a'])=='b'} : Expected value ' ( function ( ) { return __E4X . attrIdentifier ( " a " ) . toXMLString ( ) ; } ) ;', Actual value ' ( function ( ) { return ( __E4X . attrIdentifier ( ' a ' ) ) . toXMLString ( ) ; } ) ;'  of test - 
  FAILED! undefined
  PASSED! Section 2 of test - decompilation of function (){ return (@['a'])=='b'}: compile actual
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-351706.js
+begin test: e4x/undefined/regress-351706.js
+ FAILED! Section Section 1 of test - decompilation of E4X literals with parens : Expected value ' ( function ( ) { return ( ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : { " type " : 3 , " value " : m } , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) ) . _filter ( function ( ) { return y ; } ) ; } ) ;', Actual value ' ( function ( ) { return ( __E4X . setDefaultNamespace ( __defaultNamespace ) , __E4X . ctorElement ( { " type " : 1 , " open " : { " type " : 3 , " value " : m } , " close " : void 0 , " attributes " : void 0 , " content " : void 0 } ) ) . _filter ( function ( ) { return y ; } ) ; } ) ;'  of test - 
+ FAILED! undefined
+ PASSED! Section 1 of test - decompilation of E4X literals with parens: compile actual
+ PASSED! Section 2 of test - decompilation of E4X literals with parens
+ PASSED! Section 2 of test - decompilation of E4X literals with parens: compile actual
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-351988.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-352013.js
 begin test: e4x/undefined/regress-352459.js
@@ -40,7 +45,9 @@ begin test: e4x/undefined/regress-352789.js
  PASSED! Section 2 of test - Decompilation of new and .@: compile actual
  PASSED! Section 3 of test - Decompilation of new and .@
  PASSED! Section 3 of test - Decompilation of new and .@: compile actual
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-355101.js
+begin test: e4x/undefined/regress-355101.js
+ PASSED! Section 1 of test - XML Filtering predicate operator
+ PASSED! Section 1 of test - XML Filtering predicate operator: compile actual
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/decompilation/regress-355474-01.js
 begin test: e4x/undefined/regress-429249.js
  PASSED! trap should not change decompilation <x/> : before trap
@@ -76,7 +83,8 @@ begin test: e4x/undefined/11.2.1.js
  FAILED! Section Section 1 of test - 11.2.1 - Property Accessors : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
  FAILED! ReferenceError: xml is not defined
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/11.2.2.js
+begin test: e4x/undefined/11.2.2.js
+ FAILED! TypeError: Object #<an XML> has no method 'length'
 begin test: e4x/undefined/11.2.3.js
  FAILED! ReferenceError: name is not defined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/11.2.4.js
@@ -140,7 +148,8 @@ begin test: e4x/undefined/regress-301545.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/regress-340024.js
 begin test: e4x/undefined/regress-366123.js
  PASSED! Section 1 of test - Compiling long XML filtering predicate
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/regress-496113.js
+begin test: e4x/undefined/regress-496113.js
+ FAILED! TypeError: Object #<an XML> has no method '_filter'
 begin test: e4x/undefined/regress-305335.js
  FAILED! ReferenceError: xml is not defined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/extensions/regress-312196.js
@@ -157,7 +166,8 @@ begin test: e4x/undefined/regress-327897.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/extensions/regress-352846-02.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/extensions/regress-352846-03.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/extensions/regress-353165.js
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/extensions/regress-354145-06.js
+begin test: e4x/undefined/regress-354145-06.js
+ FAILED! TypeError: Object #<an XML> has no method '_filter'
 begin test: e4x/undefined/regress-354151-01.js
  FAILED! TypeError: Object #<an XML> has no method 'namespace'
 begin test: e4x/undefined/regress-354151-02.js
@@ -424,7 +434,8 @@ begin test: e4x/undefined/regress-301573.js
  FAILED! undefined
  FAILED! Section Section 2 of test - E4X - Entities : Expected value '&', Actual value '[object Object]'  of test - 
  FAILED! undefined
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-301596.js
+begin test: e4x/undefined/regress-301596.js
+ PASSED! Section 1 of test - E4X - Do not crash with XMLList filters
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-301692.js
 begin test: e4x/undefined/regress-309897.js
  PASSED! Section 1 of test - Regression - appending elements crashes mozilla
@@ -494,7 +505,8 @@ begin test: e4x/undefined/regress-354145-03.js
  FAILED! TypeError: Cannot read property 'length' of undefined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-354145-04.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-354145-05.js
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-354145-07.js
+begin test: e4x/undefined/regress-354145-07.js
+ PASSED! Section 1 of test - Immutable XML
 begin test: e4x/undefined/regress-354998.js
  PASSED! Section 1 of test - prototype should not be enumerated for XML objects.
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-355474-02.js
@@ -565,11 +577,10 @@ begin test: e4x/undefined/regress-473709.js
  PASSED! Section 1 of test - Do not assert: cursor == (uint8 *)copy->messageArgs[0] + argsCopySize
 begin test: e4x/undefined/regress-477053.js
  PASSED! Section 1 of test - Do not assert: JSVAL_IS_STRING(v)
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-561031.js
+ PASSED! ok
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Statements/12.1.js
 begin test: e4x/undefined/12.2.js
  FAILED! ReferenceError: name is not defined
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Statements/12.3-01.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/TypeConversion/10.1.1.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/TypeConversion/10.1.2.js
 begin test: e4x/undefined/10.3.1.js
@@ -711,13 +722,19 @@ begin test: e4x/undefined/13.4.4.27.js
  FAILED! undefined
  FAILED! TypeError: Object #<an XML> has no method 'parent'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.28.js
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.29.js
+begin test: e4x/undefined/13.4.4.29.js
+ FAILED! Section Section 1 of test - 13.4.4.29 - XML prependChild() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'prependChild'
 begin test: e4x/undefined/13.4.4.3-01.js
  FAILED! TypeError: Object #<an XML> has no method 'setChildren'
 begin test: e4x/undefined/13.4.4.3-02.js
  FAILED! Section Section 1 of test - 13.4.4.3 - XML.appendChild should copy child : Expected value 'error', Actual value 'no error'  of test - 
  FAILED! undefined
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.3.js
+begin test: e4x/undefined/13.4.4.3.js
+ PASSED! Section 1 of test - 13.4.4.3 - XML appendChild()
+ PASSED! Section 2 of test - 13.4.4.3 - XML appendChild()
+ FAILED! TypeError: Object #<an XML> has no method '_filter'
 begin test: e4x/undefined/13.4.4.30.js
  FAILED! Section Section 1 of test - 13.4.4.30 - propertyIsEnumerable() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
@@ -739,7 +756,10 @@ begin test: e4x/undefined/13.4.4.32.js
  FAILED! Section Section 1 of test - 13.4.4.32 - XML replace() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
  FAILED! TypeError: Object #<an XML> has no method 'replace'
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.33.js
+begin test: e4x/undefined/13.4.4.33.js
+ FAILED! Section Section 1 of test - 13.4.4.33 - XML setChildren() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'setChildren'
 begin test: e4x/undefined/13.4.4.34.js
  FAILED! Section Section 1 of test - 13.4.4.34 - XML setLocalName() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
@@ -766,18 +786,27 @@ begin test: e4x/undefined/13.4.4.39.js
  PASSED! Section 1 of test - 13.4.4.39 - XML toXMLString
  PASSED! Section 2 of test - 13.4.4.39 - XML toXMLString
  FAILED! ReferenceError: bravo is not defined
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.4.js
+begin test: e4x/undefined/13.4.4.4.js
+ FAILED! Section Section 1 of test - 13.4.4.4 - XML attribute() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'attribute'
 begin test: e4x/undefined/13.4.4.40.js
  FAILED! Section Section 1 of test - 13.4.4.40 - valueOf : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
  PASSED! Section 2 of test - 13.4.4.40 - valueOf
  PASSED! Section 3 of test - 13.4.4.40 - valueOf
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.5.js
+begin test: e4x/undefined/13.4.4.5.js
+ FAILED! Section Section 1 of test - 13.4.4.5 - XML attributes() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'attributes'
 begin test: e4x/undefined/13.4.4.6.js
  FAILED! Section Section 1 of test - 13.4.4.6 - XML child() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
  FAILED! TypeError: Object #<an XML> has no method 'child'
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.7.js
+begin test: e4x/undefined/13.4.4.7.js
+ FAILED! Section Section 1 of test - 13.4.4.7 - XML childIndex() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'childIndex'
 begin test: e4x/undefined/13.4.4.8.js
  FAILED! Section Section 1 of test - 13.4.4.8 - XML children() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
@@ -790,7 +819,6 @@ begin test: e4x/undefined/regress-324422-1.js
  FAILED! undefined
 begin test: e4x/undefined/regress-324688.js
  PASSED! Section 1 of test - No Syntax Error when trailing space and XML.ignoreWhitespace true
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/regress-336921.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/regress-376773.js
 begin test: e4x/undefined/13.5.1.js
  FAILED! Section Section 1 of test - 13.5.1 - XMLList Constructor as Function : Expected value 'xml', Actual value 'undefined'  of test - 
@@ -896,5 +924,8 @@ begin test: e4x/undefined/13.5.4.8.js
  FAILED! Section Section 1 of test - 13.5.4.8 - XMLList copy() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
  FAILED! TypeError: Object [object Object][object Object][object Object] has no method 'copy'
- FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XMLList/13.5.4.9.js
+begin test: e4x/undefined/13.5.4.9.js
+ FAILED! Section Section 1 of test - 13.5.4.9 - XMLList descendants() : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! TypeError: Object #<an XML> has no method 'descendants'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XMLList/regress-373072.js
