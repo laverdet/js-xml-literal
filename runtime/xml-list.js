@@ -3,6 +3,8 @@ var util = require('./util');
 var extend = util.extend,
     XML = require('./xml').XML,
     XMLElement = require('./xml-element').XMLElement,
+    XMLAttribute = require('./xml-attribute').XMLAttribute,
+    XMLText = require('./xml-text').XMLText,
     AttributeName = require('./attribute-name').AttributeName;
 
 function XMLList() {}

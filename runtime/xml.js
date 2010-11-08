@@ -26,6 +26,16 @@ extend(null, XML, {
   // See: XMLElement & XMLList for implementations
   appendChild: function(child) {},
 
+  // 13.4.4.8 XML.prototype.children ()
+  // Note: `index` param doesn't seem to be in the spec, but it's implemented in Firefox and AS3
+  children: function(index) {
+    var list = this._get('*');
+    if (index) {
+      list._content = index < list._content.length ? [list._content[index]] : [];
+    }
+    return list;
+  },
+
   // 13.4.4.39 XML.prototype.toXMLString ()
   toXMLString: function() {
     return this._toXMLString({'': ''}, 0);

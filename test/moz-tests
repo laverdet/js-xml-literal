@@ -184,7 +184,10 @@ begin test: e4x/undefined/11.6.1.js
  FAILED! TypeError: Object #<an XML> has no method '_addInScopeNamespace'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/11.6.2.js
 begin test: e4x/undefined/11.6.3.js
- FAILED! ReferenceError: XMLAttribute is not defined
+ FAILED! Section Section 1 of test - 11.6.3 - Compound Assignment : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 2 of test - 11.6.3 - Compound Assignment : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
 begin test: e4x/undefined/regress-301545.js
  PASSED! Section 11.1.1 - Attribute Identifiers Do not crash when attribute-op name collides with local var of test - 11.1.1 - Attribute Identifiers Do not crash when attribute-op name collides with local var
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Expressions/regress-302531.js
@@ -445,7 +448,7 @@ begin test: e4x/undefined/regress-444608.js
  FAILED! TypeError: Object #<an XML> has no method 'replace'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-257679.js
 begin test: e4x/undefined/regress-263934.js
- FAILED! ReferenceError: XMLAttribute is not defined
+ FAILED! TypeError: Cannot read property 'length' of undefined
 begin test: e4x/undefined/regress-263935.js
  FAILED! ReferenceError: foo is not defined
 begin test: e4x/undefined/regress-263936.js
@@ -588,9 +591,9 @@ begin test: e4x/undefined/regress-374106.js
 begin test: e4x/undefined/regress-374112.js
  FAILED! TypeError: Object #<an XML> has no method 'name'
 begin test: e4x/undefined/regress-374116.js
- FAILED! ReferenceError: XMLAttribute is not defined
+ FAILED! TypeError: Cannot call method '_put' of undefined
 begin test: e4x/undefined/regress-374160.js
- FAILED! ReferenceError: XMLAttribute is not defined
+ FAILED! ReferenceError: toAttributeName is not defined
 begin test: e4x/undefined/regress-375406.js
  FAILED! TypeError: Object #<an XML> has no method 'attribute'
 begin test: e4x/undefined/regress-378492.js
@@ -865,9 +868,13 @@ begin test: e4x/undefined/13.4.4.7.js
  FAILED! undefined
  FAILED! TypeError: Object #<an XML> has no method 'childIndex'
 begin test: e4x/undefined/13.4.4.8.js
- FAILED! Section Section 1 of test - 13.4.4.8 - XML children() : Expected value 'true', Actual value 'false'  of test - 
+ PASSED! Section 1 of test - 13.4.4.8 - XML children()
+ FAILED! Section Section 2 of test - 13.4.4.8 - XML children() : Expected value 'xml', Actual value 'object'  of test - 
  FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'children'
+ FAILED! Section Section 3 of test - 13.4.4.8 - XML children() : Type mismatch, expected type string, actual type object Expected value '[object Object][object Object][object Object]', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 4 of test - 13.4.4.8 - XML children() : Type mismatch, expected type string, actual type object Expected value '[object Object][object Object][object Object]', Actual value '[object Object]'  of test - 
+ FAILED! undefined
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.9.js
 begin test: e4x/undefined/regress-291930.js
  PASSED! Section 1 of test - If document starts with comment, document is discarded
@@ -969,7 +976,7 @@ begin test: e4x/undefined/13.5.4.4.js
 begin test: e4x/undefined/13.5.4.5.js
  FAILED! Section Section 1 of test - 13.5.4.5 - XMLList children() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'children'
+ FAILED! TypeError: Cannot read property 'length' of undefined
 begin test: e4x/undefined/13.5.4.6.js
  FAILED! Section Section 1 of test - 13.5.4.6 - XMLList comments() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined

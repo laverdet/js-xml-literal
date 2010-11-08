@@ -428,7 +428,8 @@ class XMLVarAnalysis : public NodeWalker {
         init_xml_methods();
         set<string>::iterator ii = xml_methods.find(static_cast<NodeIdentifier*>(right)->name());
         if (ii != xml_methods.end()) {
-          var_data = cast<XMLVarAnalysis>(ret_vector[0]).var_data;
+          cast<XMLVarAnalysis>(*parent()).var_data = var_data =
+            cast<XMLVarAnalysis>(ret_vector[0]).var_data;
           return;
         }
       }
@@ -795,7 +796,7 @@ class XMLDesugarWalker : public NodeWalker {
             set<string>::iterator ii =
               xml_methods.find(static_cast<NodeIdentifier*>(right)->name());
             if (ii != xml_methods.end()) {
-              var_data = left_ret.var_data;
+              cast<XMLDesugarWalker>(*parent()).var_data = var_data = left_ret.var_data;
             }
           }
           return;
