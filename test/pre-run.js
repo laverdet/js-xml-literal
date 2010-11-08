@@ -5,6 +5,11 @@ function print(str) {
   require('util').print(str+'\n');
 }
 
+// uneval?
+function uneval(obj) {
+  return require('util').inspect(obj);
+}
+
 // Hooks
 var hooks = {
   eval: function(eval) {

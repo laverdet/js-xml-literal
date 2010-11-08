@@ -149,6 +149,50 @@ extend(XMLChild, XMLElement, {
     return copy;
   },
 
+  // 9.1.1.8 [[Descendants]] (P)
+  _descendants: function(p) {
+    var name = toXMLName(p);
+    if (name instanceof AttributeName) {
+      return this._get(name);
+    }
+    var children = [];
+    var list = new (XMLList._ctor)(null, null, children);
+    var iterationStack = [], nodeStack = [];
+    var ii = 0, node = this;
+    if (!node._content.length) {
+      return list;
+    }
+    loop: while (true) {
+      var el = node._content[ii];
+      if (el instanceof XMLElement) {
+        if ((name.localName === '*' || name.localName === el._name.localName) &&
+            (name.uri === null || name.uri === el._name.uri)) {
+          children.push(el);
+        }
+        if (el._content.length) {
+          if (ii + 1 < node._content.length) {
+            iterationStack.push(ii + 1);
+            nodeStack.push(node);
+          }
+          node = el;
+          ii = 0;
+          continue loop;
+        }
+      } else if (name.localName === '*' && name.uri === null) {
+        children.push(el);
+      }
+      if (++ii >= node._content.length) {
+        if (iterationStack.length) {
+          ii = iterationStack.pop();
+          node = nodeStack.pop();
+        } else {
+          break loop;
+        }
+      }
+    }
+    return list;
+  },
+
   // 9.1.1.9 [[Equals]] (V)
   _equals: function(v) {
     if (!(v instanceof XMLElement)) {

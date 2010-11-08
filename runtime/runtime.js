@@ -26,6 +26,7 @@ var globals = {
     ctorList: literalCtor.ctorList,
 
     attrIdentifier: etc.toAttributeName,
+    qualifiedIdentifier: etc.toQualifiedIdentifier,
   },
 };
 for (var ii in globals) {

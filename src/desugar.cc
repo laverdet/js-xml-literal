@@ -49,6 +49,7 @@ void init_xml_methods() {
 class LocalScopeDiscovery : public NodeWalker {
   private:
     set<string>* vars;
+    bool first;
 
     NodeIdentifier* identifier(Node* node) {
       if (dynamic_cast<NodeIdentifier*>(node)) {
@@ -78,8 +79,14 @@ class LocalScopeDiscovery : public NodeWalker {
       set<string> my_vars;
       LocalScopeDiscovery walker;
       walker.vars = &my_vars;
+      walker.first = true;
       walker.walk(&node);
       return my_vars;
+    }
+
+    virtual void visit(Node& node) {
+      first = false;
+      visitChildren();
     }
 
     virtual void visit(NodeArgList& node) {
@@ -95,10 +102,16 @@ class LocalScopeDiscovery : public NodeWalker {
       if (var != NULL) {
         vars->insert(var->name());
       }
+      if (first) {
+        visit(static_cast<Node&>(node));
+      }
     }
 
     virtual void visit(NodeFunctionExpression& node) {
       // Don't enter new scopes.
+      if (first) {
+        visit(static_cast<Node&>(node));
+      }
     }
 
     virtual void visit(NodeFunctionCall& node) {
@@ -639,6 +652,10 @@ class XMLDesugarWalker : public NodeWalker {
       }
     }
 
+    virtual void visit(NodeParenthetical& node) {
+      var_data = cast<XMLDesugarWalker>(visitChild(node.childNodes().begin()))->var_data;
+    }
+
     virtual void visit(NodeAssignment& node) {
       ptr_vector ret_vector(visitChildren());
       Node* left = node.childNodes().front();
@@ -836,6 +853,7 @@ class XMLDesugarWalker : public NodeWalker {
       // for each (var ii in foo) {}
       // becomes
       // var tmp1 = foo; for (var tmp2 in tmp1) { var ii = tmp1[tmp2]; }
+      visitChildren();
       Node* iterator = node.removeChild(node.childNodes().begin());
       Node* iterexpr = node.removeChild(node.childNodes().begin());
       Node* action = node.removeChild(node.childNodes().begin());
@@ -1013,6 +1031,24 @@ class XMLDesugarWalker : public NodeWalker {
       Node* expr = node.removeChild(node.childNodes().begin());
       replace(runtime_fn("attrIdentifier", 1, expr));
       var_data.set_declared_xml();
+    }
+
+    virtual void visitQualifiedIdentifier(Node& node) {
+      // ns::foo
+      // becomes:
+      // qualifiedIdentifier(ns, 'foo')
+      visitChildren();
+      Node* ns = node.removeChild(node.childNodes().begin());
+      Node* name = node.removeChild(node.childNodes().begin());
+      replace(runtime_fn("qualifiedIdentifier", 2, ns, name));
+    }
+
+    virtual void visit(NodeStaticQualifiedIdentifier& node) {
+      visitQualifiedIdentifier(node);
+    }
+
+    virtual void visit(NodeDynamicQualifiedIdentifier& node) {
+      visitQualifiedIdentifier(node);
     }
 
     virtual void visit(NodeFilteringPredicate& node) {

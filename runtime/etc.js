@@ -1,6 +1,7 @@
 this.escapeElementValue = escapeElementValue;
 this.escapeAttributeValue = escapeAttributeValue;
 this.toAttributeName = toAttributeName;
+this.toQualifiedIdentifier = toQualifiedIdentifier;
 this.toXMLName = toXMLName;
 this.isXMLName = isXMLName;
 var toString = require('./util').toString,
@@ -68,6 +69,13 @@ function toXMLName(name) {
   } else {
     return toXMLName(toString(name));
   }
+}
+
+/**
+ * 11.1.2 Qualified Identifiers
+ */
+function toQualifiedIdentifier(ns, name) {
+  return new QName(ns, name);
 }
 
 /**
