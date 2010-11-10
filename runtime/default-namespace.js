@@ -2,7 +2,6 @@ this.getDefaultNamespace = getDefaultNamespace;
 this.setDefaultNamespace = setDefaultNamespace;
 this.createDefaultNamespace = createDefaultNamespace;
 this.getGlobalNamespaces = getGlobalNamespaces;
-this.globalNamespace = globalNamespace;
 
 /**
  * 12.1 The default xml namespace Statement
@@ -26,6 +25,7 @@ this.globalNamespace = globalNamespace;
  * properties of outer scopes.
  */
 var globalNamespace = {'': ''};
+this.globalNamespace = globalNamespace;
 
 /**
  * 12.1.1 GetDefaultNamespace()

@@ -655,7 +655,11 @@ begin test: e4x/undefined/9.1.1.1.js
  FAILED! undefined
  FAILED! Section Section 2 of test - 9.1.1.1 XML [[Get]] : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'parent'
+ FAILED! Section Section 3 of test - 9.1.1.1 XML [[Get]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 4 of test - 9.1.1.1 XML [[Get]] : Expected value 'true', Actual value 'false'  of test - 
+ FAILED! undefined
+ FAILED! ReferenceError: xml is not defined
 begin test: e4x/undefined/9.1.1.2.js
  FAILED! Section Section 1 of test - 9.1.1.2 - XML [[Put]] : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
@@ -781,9 +785,9 @@ begin test: e4x/undefined/13.4.4.26.js
  FAILED! undefined
  FAILED! ReferenceError: xml is not defined
 begin test: e4x/undefined/13.4.4.27.js
- FAILED! Section Section 1 of test - 13.4.4.27 - XML parent() : Expected value 'true', Actual value 'false'  of test - 
- FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'parent'
+ PASSED! Section 1 of test - 13.4.4.27 - XML parent()
+ PASSED! Section 2 of test - 13.4.4.27 - XML parent()
+ PASSED! Section 3 of test - 13.4.4.27 - XML parent()
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/XML/13.4.4.28.js
 begin test: e4x/undefined/13.4.4.29.js
  FAILED! Section Section 1 of test - 13.4.4.29 - XML prependChild() : Expected value 'true', Actual value 'false'  of test - 
@@ -935,9 +939,8 @@ begin test: e4x/undefined/13.5.4.15.js
  FAILED! Section Section 1 of test - 13.5.4.15 - XMLList normalize() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined
 begin test: e4x/undefined/13.5.4.16.js
- FAILED! Section Section 1 of test - 13.5.4.16 - XMLList parent() : Expected value 'true', Actual value 'false'  of test - 
- FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'parent'
+ PASSED! Section 1 of test - 13.5.4.16 - XMLList parent()
+ FAILED! TypeError: Cannot read property 'length' of undefined
 begin test: e4x/undefined/13.5.4.17.js
  FAILED! Section Section 1 of test - 13.5.4.17 - XMLList processingInstructions() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined

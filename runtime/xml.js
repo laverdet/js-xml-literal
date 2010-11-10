@@ -40,9 +40,14 @@ extend(null, XML, {
     return list;
   },
 
-  //13.4.4.22XML.prototype.name ()
+  //13.4.4.22 XML.prototype.name ()
   name: function() {
     return this._name || null;
+  },
+
+  // 13.4.4.27 XML.prototype.parent ()
+  parent: function() {
+    return this._parent || null;
   },
 
   // 13.4.4.39 XML.prototype.toXMLString ()

@@ -203,6 +203,21 @@ extend(XML, XMLList, {
   appendChild: function(child) {
     this._content.push(child);
   },
+
+
+  // 13.5.4.17 XMLList.prototype.parent ()
+  parent: function() {
+    if (this._content.length === 0) {
+      return undefined;
+    }
+    var parent = this._content[0]._parent;
+    for (var ii = 1; ii < this._content.length; ++ii) {
+      if (parent !== this._content[ii]._parent) {
+        return undefined;
+      }
+    }
+    return parent;
+  },
 });
 
 XMLList._ctor = extend(XMLList, function(targetObject, targetProperty, elements) {
