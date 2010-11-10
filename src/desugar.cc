@@ -850,17 +850,46 @@ class XMLDesugarWalker : public NodeWalker {
       }
     }
 
+    virtual void visit(NodeForIn& node) {
+      // for (var ii in foo) {}
+      // becomes
+      // for (var ii in foo._keys()) {}
+      ptr_vector ret_vector(visitChildren());
+      XMLDesugarWalker& iterexpr_ret = cast<XMLDesugarWalker>(ret_vector[1]);
+      if (iterexpr_ret.var_data.implied_xml) {
+        node_list_t::iterator iterexpr = ++node.childNodes().begin();
+        node.replaceChild(
+          safe_method_call(
+            iterexpr_ret.var_data,
+            *iterexpr,
+            "_keys", 1,
+            undefined_literal()),
+          iterexpr
+        );
+      }
+    }
+
     virtual void visit(NodeForEachIn& node) {
       // for each (var ii in foo) {}
       // becomes
       // var tmp1 = foo; for (var tmp2 in tmp1) { var ii = tmp1[tmp2]; }
-      visitChildren();
+      ptr_vector ret_vector(visitChildren());
       Node* iterator = node.removeChild(node.childNodes().begin());
       Node* iterexpr = node.removeChild(node.childNodes().begin());
       Node* action = node.removeChild(node.childNodes().begin());
       Node* iterator_var = tmp_varN();
       Node* iterexpr_var = tmp_varN();
       Node* iterator_forward;
+
+      // Check for E4X types, and use `keys()` like NodeForIn
+      XMLDesugarWalker& iterexpr_ret = cast<XMLDesugarWalker>(ret_vector[1]);
+      if (iterexpr_ret.var_data.implied_xml) {
+        iterexpr = safe_method_call(
+          iterexpr_ret.var_data,
+          iterexpr,
+          "_keys", 1,
+          undefined_literal());
+      }
 
       if (dynamic_cast<NodeVarDeclaration*>(iterator)) {
         // var ii -> var ii = tmp1[tmp2];

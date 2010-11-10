@@ -22,6 +22,10 @@ function XML(value) {
 }
 
 extend(null, XML, {
+  _keys: function() {
+    return this._content;
+  },
+
   // 13.4.4.3 XML.prototype.appendChild ( child )
   // See: XMLElement & XMLList for implementations
   appendChild: function(child) {},
@@ -34,6 +38,11 @@ extend(null, XML, {
       list._content = index < list._content.length ? [list._content[index]] : [];
     }
     return list;
+  },
+
+  //13.4.4.22XML.prototype.name ()
+  name: function() {
+    return this._name || null;
   },
 
   // 13.4.4.39 XML.prototype.toXMLString ()

@@ -558,7 +558,8 @@ begin test: e4x/undefined/regress-354145-07.js
 begin test: e4x/undefined/regress-354998.js
  PASSED! Section 1 of test - prototype should not be enumerated for XML objects.
 begin test: e4x/undefined/regress-355474-02.js
- FAILED! TypeError: Object [object Object] has no method 'toXMLString'
+ FAILED! Section Section 1 of test - Iterating over XML with WAY_TOO_MUCH_GC : Expected value '<a>text</a>', Actual value '<a>NL  textNL</a>'  of test - 
+ FAILED! undefined
 begin test: e4x/undefined/regress-355478.js
  FAILED! Section Section 1 of test - Do not crash with hasOwnProperty : Expected value 'TypeError: XML.prototype.hasOwnProperty called on incompatible Object', Actual value 'TypeError: Cannot read property 'length' of undefined'  of test - 
  FAILED! undefined
@@ -589,7 +590,7 @@ begin test: e4x/undefined/regress-372564.js
 begin test: e4x/undefined/regress-374106.js
  FAILED! TypeError: Object #<an XML> has no method 'contains'
 begin test: e4x/undefined/regress-374112.js
- FAILED! TypeError: Object #<an XML> has no method 'name'
+ FAILED! TypeError: Object #<an XML> has no method 'setName'
 begin test: e4x/undefined/regress-374116.js
  FAILED! TypeError: Cannot call method '_put' of undefined
 begin test: e4x/undefined/regress-374160.js
@@ -758,9 +759,11 @@ begin test: e4x/undefined/13.4.4.21.js
  FAILED! undefined
  FAILED! TypeError: Object #<an XML> has no method 'localName'
 begin test: e4x/undefined/13.4.4.22.js
- FAILED! Section Section 1 of test - 13.4.4.22 - XML name() : Expected value 'true', Actual value 'false'  of test - 
+ PASSED! Section 1 of test - 13.4.4.22 - XML name()
+ PASSED! Section 2 of test - 13.4.4.22 - XML name()
+ FAILED! Section Section 3 of test - 13.4.4.22 - XML name() : Expected value 'bravo', Actual value 'null'  of test - 
  FAILED! undefined
- FAILED! TypeError: Object #<an XML> has no method 'name'
+ FAILED! ReferenceError: bravo is not defined
 begin test: e4x/undefined/13.4.4.23.js
  FAILED! Section Section 1 of test - 13.4.4.23 - XML namespace() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined

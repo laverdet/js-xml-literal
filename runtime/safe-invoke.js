@@ -1,6 +1,7 @@
 this._get = get;
 this._put = put;
 this._equals = equals;
+this._keys = keys;
 var XML = require('./xml').XML;
 
 /**
@@ -45,4 +46,8 @@ function equals(left, right) {
   } else {
     return left == right;
   }
+}
+
+function keys(obj) {
+  return obj instanceof XML ? obj._keys() : obj;
 }
