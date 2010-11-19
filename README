@@ -1,0 +1,14 @@
+E4X support for JavaScript via desugaring.
+
+
+To build this software:
+
+  git submodule init
+  git submodule update
+  cd src
+  make
+
+
+To get started quickly, see quick-run:
+
+  node quick-run <script>
