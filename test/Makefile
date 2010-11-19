@@ -10,8 +10,8 @@ mozilla-1.9.2/js/src/tests/e4x/jstests.list:
 	  read -p 'Are you sure you want to do this? (y \ n) ' R; \
 	  if [[ $$R == 'n' ]]; then exit 1; fi \
 	done
-	curl -O 'ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest/source/firefox-3.6.11.source.tar.bz2'
-	tar -xvf firefox-3.6.11.source.tar.bz2 mozilla-1.9.2/js/src/tests
-	rm -f firefox-3.6.11.source.tar.bz2
+	curl -O 'ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.12/source/firefox-3.6.12.source.tar.bz2'
+	tar -xvf firefox-3.6.12.source.tar.bz2 mozilla-1.9.2/js/src/tests
+	rm -f firefox-3.6.12.source.tar.bz2
 
 .PHONY: moz-tests
