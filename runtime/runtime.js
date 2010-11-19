@@ -41,6 +41,11 @@ this.register = function(ext) {
   var fs = require('fs');
   require.extensions['.' + ext] = function(module, filename) {
     var src = fs.readFileSync(filename, 'utf8');
-    module._compile(desugar(src), filename);
+    try {
+      src = desugar(src);
+    } catch(e) {
+      throw new SyntaxError(filename + '\n' + e);
+    }
+    module._compile(src, filename);
   }
 }
