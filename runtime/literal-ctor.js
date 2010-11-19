@@ -1,7 +1,7 @@
 this.ctorElement = ctorElement;
 this.ctorList = ctorList;
 var util = require('./util');
-var beget = util.beget, parseXMLName = util.parseXMLName,
+var beget = util.beget, parseXMLName = util.parseXMLName, toString = util.toString,
     Namespace = require('./namespace').Namespace,
     QName = require('./qname').QName,
     XML = require('./xml').XML,
