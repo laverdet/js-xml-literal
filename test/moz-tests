@@ -127,7 +127,8 @@ begin test: e4x/undefined/11.2.1.js
 begin test: e4x/undefined/11.2.2.js
  FAILED! TypeError: Object #<an XML> has no method 'length'
 begin test: e4x/undefined/11.2.3.js
- FAILED! ReferenceError: name is not defined
+ FAILED! Section Section 1 of test - 11.2.3 - XML Descendant Accessor : Type mismatch, expected type string, actual type object Expected value '[object Object][object Object]', Actual value '[object Object]'  of test - 
+ FAILED! undefined
 begin test: e4x/undefined/11.2.4.js
  FAILED! TypeError: Object #<an XML> has no method '_filter'
 begin test: e4x/undefined/11.3.1.js
@@ -492,13 +493,13 @@ begin test: e4x/undefined/regress-313799.js
  FAILED! TypeError: Object #<an XML> has no method 'child'
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/Regress/regress-318922.js
 begin test: e4x/undefined/regress-321547.js
- FAILED! Section Section 1 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! Section Section 1 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants("c");}'  of test - 
  FAILED! undefined
- FAILED! Section Section 3 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! Section Section 3 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants("c");}'  of test - 
  FAILED! undefined
- FAILED! Section Section 4 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants(c);}'  of test - 
+ FAILED! Section Section 4 of test - Operator .. should not implicitly quote its right operand : Expected value 'function a() { var x = <a><b><c>value c</c></b></a>; return x..c; }', Actual value 'function a() { var x = (__E4X.setDefaultNamespace(__defaultNamespace), __E4X.ctorElement({"type": 1, "open": "a", "close": "a", "attributes": void 0, "content": [{"type": 1, "open": "b", "close": "b", "attributes": void 0, "content": [{"type": 1, "open": "c", "close": "c", "attributes": void 0, "content": [{"type": 2, "value": "value c"}]}]}]})); return x._descendants("c");}'  of test - 
  FAILED! undefined
- FAILED! ReferenceError: c is not defined
+ FAILED! TypeError: Object #<an XML> has no method 'replace'
 begin test: e4x/undefined/regress-322499.js
  PASSED! Section 1 of test - Do not define AnyName
  PASSED! Section 2 of test - Do not define AnyName
@@ -631,7 +632,15 @@ begin test: e4x/undefined/regress-477053.js
 begin test: e4x/undefined/12.1.js
  FAILED! TypeError: Object #<an Object> has no method 'attrWildcard'
 begin test: e4x/undefined/12.2.js
- FAILED! ReferenceError: name is not defined
+ PASSED! Section 1.0 of test - 12.2 - For-in statement
+ PASSED! Section 1.1 of test - 12.2 - For-in statement
+ PASSED! Section 1.count of test - 12.2 - For-in statement
+ PASSED! Section 2.0 of test - 12.2 - For-in statement
+ PASSED! Section 2.1 of test - 12.2 - For-in statement
+ PASSED! Section 2.count of test - 12.2 - For-in statement
+ PASSED! Section 3.0 of test - 12.2 - For-in statement
+ PASSED! Section 3.1 of test - 12.2 - For-in statement
+ PASSED! Section 3.count of test - 12.2 - For-in statement
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/TypeConversion/10.1.1.js
  FAILED! Failed to compile mozilla-1.9.2/js/src/tests/e4x/TypeConversion/10.1.2.js
 begin test: e4x/undefined/10.3.1.js
@@ -691,7 +700,7 @@ begin test: e4x/undefined/9.2.1.2.js
  FAILED! undefined
  FAILED! TypeError: Cannot call method '_resolveValue' of undefined
 begin test: e4x/undefined/9.2.1.8.js
- FAILED! ReferenceError: bravo is not defined
+ FAILED! TypeError: Object #<an XML> has no method '_descendants'
 begin test: e4x/undefined/9.2.1.9.js
  FAILED! TypeError: Cannot read property 'length' of undefined
 begin test: e4x/undefined/13.4.1.js
@@ -848,11 +857,29 @@ begin test: e4x/undefined/13.4.4.38.js
  FAILED! undefined
  FAILED! Section Section 2 of test - 13.4.4.38 - XML toString() : Expected value 'one', Actual value '[object Object]'  of test - 
  FAILED! undefined
- FAILED! ReferenceError: bravo is not defined
+ FAILED! Section Section 3 of test - 13.4.4.38 - XML toString() : Expected value '<bravo>one</bravo><bravo>two</bravo>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 4 of test - 13.4.4.38 - XML toString() : Expected value '', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 5 of test - 13.4.4.38 - XML toString() : Expected value '<charlie><bravo>two</bravo></charlie>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 5 of test - 13.4.4.38 - XML toString() : Expected value '<charlie>two<bravo/></charlie>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 6 of test - 13.4.4.38 - XML toString() : Expected value '<bravo/><bravo/>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
+ FAILED! Section Section 7 of test - 13.4.4.38 - XML toString() : Expected value '<bravo>one<charlie/></bravo><bravo>two<charlie/></bravo>', Actual value '[object Object]'  of test - 
+ FAILED! undefined
 begin test: e4x/undefined/13.4.4.39.js
  PASSED! Section 1 of test - 13.4.4.39 - XML toXMLString
  PASSED! Section 2 of test - 13.4.4.39 - XML toXMLString
- FAILED! ReferenceError: bravo is not defined
+ PASSED! Section 3 of test - 13.4.4.39 - XML toXMLString
+ PASSED! Section 4 of test - 13.4.4.39 - XML toXMLString
+ PASSED! Section 5 of test - 13.4.4.39 - XML toXMLString
+ FAILED! Section Section 6 of test - 13.4.4.39 - XML toXMLString : Expected value '<charlie>two<bravo/></charlie>', Actual value '<charlie>NL        twoNL        <bravo/></charlie>'  of test - 
+ FAILED! undefined
+ PASSED! Section 7 of test - 13.4.4.39 - XML toXMLString
+ PASSED! Section 8 of test - 13.4.4.39 - XML toXMLString
+ FAILED! TypeError: Object #<an XML> has no method 'copy'
 begin test: e4x/undefined/13.4.4.4.js
  FAILED! Section Section 1 of test - 13.4.4.4 - XML attribute() : Expected value 'true', Actual value 'false'  of test - 
  FAILED! undefined

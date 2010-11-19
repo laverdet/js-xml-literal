@@ -1108,6 +1108,11 @@ class XMLDesugarWalker : public NodeWalker {
       visitChildren();
       Node* left = node.removeChild(node.childNodes().begin());
       Node* right = node.removeChild(node.childNodes().begin());
+      if (dynamic_cast<NodeIdentifier*>(right)) {
+        Node* tmp = right;
+        right = new NodeStringLiteral(static_cast<NodeIdentifier*>(tmp)->name(), false);
+        delete tmp;
+      }
       replace(method_call(left, "_descendants", 1, right));
       var_data.set_declared_xml();
     }
