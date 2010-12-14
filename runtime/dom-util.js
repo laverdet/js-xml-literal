@@ -1,5 +1,6 @@
 this.nodeIndex = nodeIndex;
-this.NodeError = NodeError;
+this.escapeElementValue = escapeElementValue;
+this.escapeAttributeValue = escapeAttributeValue;
 
 var util = require('./util');
 
@@ -16,8 +17,19 @@ function nodeIndex(parentNode, node) {
   return index;
 }
 
-/**
- * Errors thrown by the runtime
- */
-function NodeError() {}
-extend(NodeError, Error);
+function escapeElementValue(val) {
+  return val
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeAttributeValue(val) {
+  return val
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/"/g, '&quot;')
+    .replace(/\n/g, '&#xA;')
+    .replace(/\r/g, '&#xD;')
+    .replace(/\t/g, '&#x9;');
+}

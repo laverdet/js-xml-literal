@@ -8,12 +8,12 @@ var domUtil = require('./dom-util');
 
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
+var beget = util.beget;
 var extend = util.extend;
 var Node = node.Node;
 var NodeData = node.NodeData;
 var Fragment = fragment.Fragment;
 var nodeIndex = domUtil.nodeIndex;
-var NodeError = domUtil.NodeError;
 
 /**
  * Utility functions for children functions.
@@ -21,7 +21,7 @@ var NodeError = domUtil.NodeError;
 function assertValidChild(node, child) {
   while (node) {
     if (child === node) {
-      throw new NodeError('cannot create circular heirarchy');
+      throw new Error('cannot create circular heirarchy');
     }
     node = node.__.parentNode;
   }
@@ -44,7 +44,7 @@ function stealFragmentChildren(node, fragment) {
  * `NodeWithChildren` node. Subclasses of this may contain children.
  */
 function NodeWithChildren() {
-  throw new Error;
+  Node.call(this); // throws
 }
 extend(NodeWithChildren, Node);
 
@@ -83,7 +83,7 @@ defineProperties(NodeWithChildren.prototype, {
   replaceChild: function(newChild, oldChild) {
     var index = nodeIndex(this, oldChild);
     if (index === -1) {
-      throw new NodeError('`oldChild` not found');
+      throw new Error('`oldChild` not found');
     }
     if (newChild instanceof Fragment) {
       assertValidChildren(this, newChild.__.childNodes);
@@ -104,7 +104,7 @@ defineProperties(NodeWithChildren.prototype, {
   removeChild: function(oldChild) {
     var index = nodeIndex(this, oldChild);
     if (index === -1) {
-      throw new NodeError('`oldChild` not found');
+      throw new Error('`oldChild` not found');
     }
     this.__.childNodes.splice(index, 1);
     oldChild.__.parentNode = null;
@@ -137,9 +137,7 @@ defineGetters(NodeWithChildren.prototype, {
   childNodes: function() {
     // Worth it? Just prevents mutation, but slows iteration
     if (!this.__.childNodeList) {
-      var F = function() {};
-      F.prototype = this.__.childNodes;
-      this.__.childNodeList = new F;
+      Object.freeze(this.__.childNodeList = beget(this.__.childNodes));
     }
     return this.__.childNodeList;
   },

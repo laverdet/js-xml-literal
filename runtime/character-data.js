@@ -14,7 +14,7 @@ var NodeData = node.NodeData;
  * `CharacterData` node. This is for `Text`, and `Comment` nodes.
  */
 function CharacterData() {
-  throw new Error;
+  Node.call(this); // throws
 }
 extend(CharacterData, Node);
 
@@ -27,9 +27,6 @@ extend(CharacterDataData, NodeData);
 function CharacterDataCtor(parentNode, data) {
   Object.defineProperty(this, '__', {
     value: new CharacterDataData(parentNode, data),
-    writeable: false,
-    configurable: false,
-    enumerable: false
   });
 }
 CharacterDataCtor.prototype = CharacterData.prototype;

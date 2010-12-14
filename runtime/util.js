@@ -7,15 +7,10 @@ this.defineGetters = defineGetters;
 /**
  * Extends a function via simple prototype chain.
  */
-function extend(derived, base, proto) {
-  if (base) {
-    function F() {}
-    F.prototype = base.prototype;
-    derived.prototype = new F;
-  }
-  for (var ii in proto) {
-    derived.prototype[ii] = proto[ii];
-  }
+function extend(derived, base) {
+  function F() {}
+  F.prototype = base.prototype;
+  derived.prototype = new F;
   return derived;
 }
 
@@ -48,28 +43,22 @@ function beget(obj) {
 }
 
 /**
- * Defines non-enumerable properties on an object.
+ * Defines properties on an object.
  */
 function defineProperties(obj, properties) {
   for (var ii in properties) {
-    Object.defineProperty(obj, ii, {
-      value: properties[ii],
-      writable: false,
-      configurable: false,
-      enumerable: false,
-    });
+    obj[ii] = properties[ii];
   }
 }
 
 /**
- * Defines non-enumerable getters on an object.
+ * Defines a list of getters on an object.
  */
 function defineGetters(obj, getters) {
   for (var ii in getters) {
     Object.defineProperty(obj, ii, {
       get: getters[ii],
-      configurable: false,
-      enumerable: false,
+      enumerable: true,
     });
   }
 }

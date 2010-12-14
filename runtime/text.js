@@ -13,16 +13,13 @@ var CharacterDataData = characterData.CharacterDataData;
  * `Text` node. For text in the DOM.
  */
 function Text() {
-  throw new Error;
+  CharacterData.call(this); // throws
 }
 extend(Text, CharacterData);
 
 function TextCtor(parentNode, data) {
   Object.defineProperty(this, '__', {
     value: new CharacterDataData(parentNode, data),
-    writeable: false,
-    configurable: false,
-    enumerable: false
   });
 }
 TextCtor.prototype = Text.prototype;

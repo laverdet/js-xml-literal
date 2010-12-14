@@ -7,13 +7,12 @@ var domUtil = require('./dom-util');
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
 var nodeIndex = domUtil.nodeIndex;
-var NodeError = domUtil.NodeError;
 
 /**
- * Base `Node` class. No direct instances of this will exist.
+ * Abstract `Node` class.
  */
 function Node() {
-  throw new Error;
+  throw new TypeError('Illegal constructor');
 }
 
 function NodeData(parentNode) {
@@ -24,12 +23,7 @@ var stubs = [
   'insertBefore', 'replaceChild', 'removeChild', 'appendChild', 'hasChildNodes', 'cloneNode'
 ];
 for (var ii in stubs) {
-  Object.defineProperty(Node.prototype, stubs[ii], {
-    value: function() { throw new NodeError; },
-    writable: false,
-    configurable: false,
-    enumerable: false,
-  });
+  Node.prototype[ii] = function() { throw new Error; };
 }
 
 var properties = [
@@ -39,8 +33,7 @@ var properties = [
 for (var ii in properties) {
   Object.defineProperty(Node.prototype, properties[ii], {
     get: function() { return null; },
-    configurable: false,
-    enumerable: false,
+    enumerable: true,
   });
 }
 
