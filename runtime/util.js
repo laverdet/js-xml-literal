@@ -1,17 +1,13 @@
-/**
- * General utilities used throughout the runtime. These are not mentioned in ECMA-357, they are
- * just random functions which help with the implementation details.
- */
 this.extend = extend;
 this.toString = toString;
-this.setFinalProperty = setFinalProperty;
 this.beget = beget;
-this.parseXMLName = parseXMLName;
+this.defineProperties = defineProperties;
+this.defineGetters = defineGetters;
 
 /**
  * Extends a function via simple prototype chain.
  */
-function extend(base, derived, proto) {
+function extend(derived, base, proto) {
   if (base) {
     function F() {}
     F.prototype = base.prototype;
@@ -43,18 +39,6 @@ function toString(expr) {
 }
 
 /**
- * Sets a property with ReadOnly, DontDelete
- */
-function setFinalProperty(obj, key, val) {
-  Object.defineProperty(obj, key, {
-    value: val,
-    writable: false,
-    configurable: false,
-    enumerable: true,
-  });
-}
-
-/**
  * Return a begotten object
  */
 function beget(obj) {
@@ -64,12 +48,28 @@ function beget(obj) {
 }
 
 /**
- * Parses XML tag name and returns [..., <namespace>, <name]
+ * Defines non-enumerable properties on an object.
  */
-function parseXMLName(name) {
-  var ret = /^(?:([a-zA-Z_][a-zA-Z0-9_.\-]*):)?([a-zA-Z_][a-zA-Z0-9_.\-]*)$/.exec(name);
-  if (!ret) {
-    throw new SyntaxError('illegal XML name ' + name);
+function defineProperties(obj, properties) {
+  for (var ii in properties) {
+    Object.defineProperty(obj, ii, {
+      value: properties[ii],
+      writable: false,
+      configurable: false,
+      enumerable: false,
+    });
   }
-  return ret;
+}
+
+/**
+ * Defines non-enumerable getters on an object.
+ */
+function defineGetters(obj, getters) {
+  for (var ii in getters) {
+    Object.defineProperty(obj, ii, {
+      get: getters[ii],
+      configurable: false,
+      enumerable: false,
+    });
+  }
 }
