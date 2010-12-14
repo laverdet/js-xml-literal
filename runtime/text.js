@@ -1,9 +1,11 @@
 this.Text = Text;
 this.TextCtor = TextCtor;
 
+var domUtil = require('./dom-util');
 var util = require('./util');
 var characterData = require('./character-data');
 
+var escapeElementValue = domUtil.escapeElementValue;
 var defineProperties = util.defineProperties;
 var extend = util.extend;
 var CharacterData = characterData.CharacterData;
@@ -26,6 +28,6 @@ TextCtor.prototype = Text.prototype;
 
 defineProperties(Text.prototype, {
   toString: function() {
-    return this.__.data;
+    return escapeElementValue(this.__.data);
   },
 });

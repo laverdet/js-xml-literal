@@ -1,12 +1,16 @@
 this.ctorElement = ctorElement;
 this.ctorList = ctorList;
 
+var util = require('./util');
 var environment = require('./environment');
 var namespace = require('./namespace');
+var node = require('./node');
 var element = require('./element');
 var text = require('./text');
 
+var toString = util.toString;
 var getGlobalNamespaces = namespace.getGlobalNamespaces;
+var Node = node.Node;
 var ElementCtor = element.ElementCtor;
 var TextCtor = text.TextCtor;
 var XMLEnvironment = environment.XMLEnvironment;
@@ -23,16 +27,17 @@ function parseXMLName(name) {
 }
 
 function ctorElement(element) {
-  return generateChildren([element], XMLEnvironment.get(), null)[0];
+  var env = XMLEnvironment.get();
+  return generateChildren([element], env._namespaces, env._factories, null)[0];
 }
 
 function ctorList(element) {
   var list = new XMLList;
-  list.__.childNodes = generateChildren(elements, XMLEnvironment.get(), list);
+  list.__.childNodes = generateChildren(elements, env._namespaces, env._factories, list);
   return list;
 }
 
-function generateChildren(descriptors, env, parentNode) {
+function generateChildren(descriptors, namespaces, factories, parentNode) {
   var elements = [];
   for (var ii = 0; ii < descriptors.length; ++ii) {
     var descriptor = descriptors[ii];
@@ -51,7 +56,7 @@ function generateChildren(descriptors, env, parentNode) {
         if (keys) {
           for (var jj = 0; jj < keys.length; ++jj) {
             if (/^xmlns(?:$|:)/.test(keys[jj])) {
-              currentNamespaces = currentNamespaces || beget(env._namespaces);
+              currentNamespaces = currentNamespaces || beget(namespaces);
               var xmlns = parseXMLName(keys[jj]);
               currentNamespaces[xmlns[1] ? xmlns[2] : ''] = vals[jj];
               keys.splice(jj, 1);
@@ -60,7 +65,7 @@ function generateChildren(descriptors, env, parentNode) {
             }
           }
         }
-        currentNamespaces = currentNamespaces || env._namespaces;
+        currentNamespaces = currentNamespaces || namespaces;
 
         // parse element's name
         var name = parseXMLName(descriptor.open);
@@ -78,8 +83,8 @@ function generateChildren(descriptors, env, parentNode) {
 
         // construct
         var ctor;
-        if (namespaceURI in env._factories) {
-          ctor = env._factories[namespaceURI](nodeName);
+        if (namespaceURI in factories) {
+          ctor = factories[namespaceURI](nodeName);
         } else {
           ctor = ElementCtor;
         }

@@ -3,6 +3,7 @@ var node = require('./node');
 var element = require('./element');
 var characterData = require('./character-data');
 var text = require('./text');
+var unescapedData = require('./unescaped-data');
 var environment = require('./environment');
 var html = require('./html');
 var desugar = require('e4x-bump').desugar;
@@ -13,6 +14,7 @@ this.Node = node.Node;
 this.Element = element.Element;
 this.CharacterData = characterData.CharacterData;
 this.Text = text.Text;
+this.UnsafeUnescapedData = unescapedData.UnescapedData;
 this.XMLEnvironment = environment.XMLEnvironment;
 global.__E4X = this.__E4X = {
   ctorElement: literal.ctorElement,

@@ -11,7 +11,7 @@ var Node = node.Node;
 var NodeData = node.NodeData;
 
 /**
- * `CharacterData` node. This is for `Text`, and `Comment` nodes.
+ * Abstract `CharacterData` node. This is for `Text`, and `Comment` nodes.
  */
 function CharacterData() {
   Node.call(this); // throws
