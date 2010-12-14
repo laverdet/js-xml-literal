@@ -7,6 +7,7 @@ var node = require('./node');
 var element = require('./element');
 var text = require('./text');
 
+var beget = util.beget;
 var toString = util.toString;
 var Node = node.Node;
 var ElementCtor = element.ElementCtor;
@@ -94,9 +95,9 @@ function generateChildren(descriptors, namespaces, factories, parentNode) {
           for (var jj = 0; jj < keys.length; ++jj) {
             var attrName = parseXMLName(keys[jj]), attrURI = null;
             if (attrName[1]) {
-              attrURI = currentNamespaces[name[1]];
-              if (!namespace) {
-                throw new TypeError('invalid XML namespace ' + name[1]);
+              attrURI = currentNamespaces[attrName[1]];
+              if (!attrURI) {
+                throw new TypeError('invalid XML namespace ' + attrName[1]);
               }
               element.setAttributeNS(attrURI, attrName[2], vals[jj]);
             } else {

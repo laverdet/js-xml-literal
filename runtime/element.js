@@ -8,6 +8,7 @@ var environment = require('./environment');
 var nodeWithChildren = require('./node-with-children');
 
 var escapeAttributeValue = domUtil.escapeAttributeValue;
+var beget = util.beget;
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
 var extend = util.extend;
@@ -55,9 +56,28 @@ Object.defineProperty(Element.prototype, '_selfClosing', {
   configurable: true,
 });
 
-function elementToString(el, pretty, level) {
+function resolvePrefix(uri, namespaces) {
+  if (uri in namespaces) {
+    return namespaces[uri];
+  }
+  var prefix, ii = 0;
+  do {
+    prefix =
+      String.fromCharCode(Math.floor(ii / 25) + 97) + String.fromCharCode(ii % 25 + 97);
+    ++ii;
+  } while (prefix in namespaces);
+  namespaces[uri] = prefix;
+  return prefix;
+}
+
+function elementToString(el, namespaces, usedNamespaces, pretty, level, first) {
   // open tag
-  var str = '<' + el.__.nodeName;
+  var str = '<';
+  if (namespaces[el.__.namespaceURI] !== '') {
+    usedNamespaces[el.__.namespaceURI] = true;
+    str += resolvePrefix(el.__.namespaceURI, namespaces) + ':';
+  }
+  str += el.__.nodeName;
 
   // attributes
   for (var ii in el.__.attributes) {
@@ -72,27 +92,54 @@ function elementToString(el, pretty, level) {
     str += ' ' + ii + '="' + val + '"';
   }
 
+  // namespaced attributes
+  for (var uri in el.__.attributesNS) {
+    for (var ii in el.__.attributesNS[uri]) {
+      var val;
+      if (el.__.attributesNS[uri][ii] === true) {
+        val = ii;
+      } else if (el.__.attributesNS[uri][ii] === false) {
+        continue;
+      } else {
+        val = escapeAttributeValue(toString(el.__.attributesNS[uri][ii]));
+      }
+      usedNamespaces[uri] = true;
+      str += ' ' + resolvePrefix(uri, namespaces) + ':' + ii + '="' + val + '"';
+    }
+  }
+
+  // children (must render these first to figure out which namespaces were found)
+  var content = '';
+  for (var ii = 0; ii < el.__.childNodes.length; ++ii) {
+    if (pretty) {
+      if (el.__.childNodes.length || el.__.childNodes[0] instanceof Element) {
+        content += '\n';
+        content += indent(level + 1);
+      }
+    }
+    if (el.__.childNodes[ii] instanceof Element) {
+      content +=
+        elementToString(el.__.childNodes[ii], namespaces, usedNamespaces, pretty, level + 1);
+    } else {
+      content += el.__.childNodes[ii].toString();
+    }
+  }
+  if (pretty && (el.__.childNodes.length || el.__.childNodes[0] instanceof Element)) {
+    content += '\n';
+  }
+
+  // top-level element must render namespace declarations
+  if (first) {
+    for (var uri in usedNamespaces) {
+      str += ' xmlns:' + namespaces[uri] + '="' + escapeAttributeValue(uri) + '"';
+    }
+  }
+
   // self-closing tag with no children
   if (el._selfClosing && el.__.childNodes.length === 0) {
     return str + '/>';
   }
-  str += '>';
-
-  // children
-  for (var ii = 0; ii < el.__.childNodes.length; ++ii) {
-    if (pretty) {
-      if (ii) {
-        str += '\n';
-      }
-      str += indent(level + 1);
-    }
-    if (el.__.childNodes[ii] instanceof Element) {
-      str += elementToString(el.__.childNodes[ii], pretty, level + 1);
-    } else {
-      str += el.__.childNodes[ii].toString();
-    }
-  }
-  return str + '</' + el.__.nodeName + '>';
+  return str + '>' + content + '</' + el.__.nodeName + '>';
 }
 
 function normalizeName(name) {
@@ -142,7 +189,8 @@ defineProperties(Element.prototype, {
   },
 
   toString: function() {
-    return elementToString(this, XMLEnvironment.get().prettyPrint, 0);
+    var env = XMLEnvironment.get();
+    return elementToString(this, beget(env._namespacesReverse), {}, env.prettyPrint, 0, true);
   },
 });
 

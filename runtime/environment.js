@@ -5,6 +5,7 @@ var environmentStack = [];
 
 function XMLEnvironment() {
   this._namespaces = {};
+  this._namespacesReverse = {};
   this._factories = {};
   this.ignoreComments = true;
   this.ignoreProcessingInstructions = true;
@@ -15,12 +16,14 @@ function XMLEnvironment() {
 XMLEnvironment.prototype = {
   registerPrefix: function(prefix, uri) {
     this._namespaces[prefix] = uri;
+    this._namespacesReverse[uri] = prefix;
   },
 
   removePrefix: function(prefix) {
     if (!(prefix in this._namespaces)) {
       throw new Error('namespace `' + prefix + '` does not exist');
     }
+    delete this._namespacesReverse[this._namespaces[prefix]];
     delete this._namespaces[prefix];
   },
 
