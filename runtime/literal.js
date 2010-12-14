@@ -3,13 +3,11 @@ this.ctorList = ctorList;
 
 var util = require('./util');
 var environment = require('./environment');
-var namespace = require('./namespace');
 var node = require('./node');
 var element = require('./element');
 var text = require('./text');
 
 var toString = util.toString;
-var getGlobalNamespaces = namespace.getGlobalNamespaces;
 var Node = node.Node;
 var ElementCtor = element.ElementCtor;
 var TextCtor = text.TextCtor;
