@@ -6,7 +6,7 @@ var text = require('./text');
 var unescapedData = require('./unescaped-data');
 var environment = require('./environment');
 var html = require('./html');
-var desugar = require('e4x-bump').desugar;
+var desugar = require('js-xml-literal').desugar;
 
 // Exports
 var XMLEnvironment = environment.XMLEnvironment;

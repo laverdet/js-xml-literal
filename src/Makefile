@@ -3,7 +3,7 @@ LIBFBJS = ../external/libfbjs
 LIBFBJS_A = $(LIBFBJS)/libfbjs.a
 CPPFLAGS = -ggdb -Wall -DNOT_FBMAKE=1 -I$(LIBFBJS)/.. -I$(NODE_PREFIX)/include -I$(NODE_PREFIX)/include/node
 
-all: e4x-bump.node
+all: js-xml-literal.node
 
 $(LIBFBJS_A):
 	cd $(LIBFBJS); make
@@ -18,9 +18,9 @@ desugar.o: $(LIBFBJS_A)
 cli: cli.o desugar.o $(LIBFBJS_A)
 	$(CXX) $(CPPFLAGS) -o $@ $^
 
-e4x-bump.node: e4x-bump.o desugar.o $(LIBFBJS_A)
+js-xml-literal.node: js-xml-literal.o desugar.o $(LIBFBJS_A)
 	$(CXX) $(CPPFLAGS) -bundle -undefined dynamic_lookup -o $@ $^
 
 clean:
-	-$(RM) cli.o desugar.o e4x-bump.o cli e4x-bump.node
+	-$(RM) cli.o desugar.o js-xml-literal.o cli js-xml-literal.node
 	cd $(LIBFBJS); make clean

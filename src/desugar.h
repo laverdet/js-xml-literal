@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <string>
 
-namespace e4x_bump {
-  const std::string bump(const std::string &code);
+namespace js_xml_literal {
+  const std::string desugar(const std::string &code);
 }

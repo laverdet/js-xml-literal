@@ -1,6 +1,6 @@
 #!/opt/node/bin/node
-// Quick wrapper script for running E4X in NodeJS
-// Usage: node ./quick-run <file>
+// Quick wrapper script for running with dom literal support in NodeJS
+// Usage: ./quick-run <file>
 require.paths.push('./src');
 require('./runtime/runtime').register('js');
 var arg = process.argv[2];

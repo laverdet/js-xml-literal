@@ -15,7 +15,7 @@
 
 using namespace fbjs;
 using namespace std;
-namespace e4x_bump {
+namespace js_xml_literal {
 
 const int TYPE_ELEMENT = 1;
 const int TYPE_CDATA = 2;
@@ -70,7 +70,7 @@ class XMLDesugarWalker : public NodeWalker {
     Node* tmp_varN() {
       // doesn't get automatically declared
       char buf[16];
-      sprintf(buf, "__E4XFETMP%x", *for_each_count);
+      sprintf(buf, "__FETMP%x", *for_each_count);
       ++*for_each_count;
       return new NodeIdentifier(buf);
     }
@@ -234,7 +234,7 @@ class XMLDesugarWalker : public NodeWalker {
     }
 };
 
-const string bump(const string &code) {
+const string desugar(const string &code) {
   NodeProgram root(code.c_str(), (node_parse_enum)(PARSE_TYPEHINT | PARSE_OBJECT_LITERAL_ELISON | PARSE_E4X));
   XMLDesugarWalker walker;
   assert(&root == walker.walk(&root));

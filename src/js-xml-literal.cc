@@ -6,14 +6,14 @@ using namespace std;
 using namespace v8;
 using namespace node;
 
-Handle<Value> E4XDesugar(const Arguments& args) {
+Handle<Value> desugar(const Arguments& args) {
   HandleScope scope;
   if (args.Length() < 1) {
     return ThrowException(Exception::TypeError(String::New("requires an argument.")));
   }
   String::Utf8Value src(args[0]->ToString());
   try {
-    string desugared(e4x_bump::bump(*src));
+    string desugared(js_xml_literal::desugar(*src));
     return scope.Close(String::New(desugared.c_str()));
   } catch (fbjs::ParseException& ex) {
     return ThrowException(Exception::SyntaxError(String::New(ex.what())));
@@ -21,5 +21,5 @@ Handle<Value> E4XDesugar(const Arguments& args) {
 }
 
 extern "C" void init(Handle<Object> target) {
-  NODE_SET_METHOD(target, "desugar", E4XDesugar);
+  NODE_SET_METHOD(target, "desugar", desugar);
 }

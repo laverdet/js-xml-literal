@@ -1,4 +1,4 @@
-E4X support for JavaScript via desugaring.
+DOM literal support for JavaScript via desugaring.
 
 
 To build this software:
@@ -11,4 +11,4 @@ To build this software:
 
 To get started quickly, see quick-run:
 
-  node quick-run <script>
+  ./quick-run <script>
