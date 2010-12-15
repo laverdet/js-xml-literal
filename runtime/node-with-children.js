@@ -14,6 +14,7 @@ var Node = node.Node;
 var NodeData = node.NodeData;
 var Fragment = fragment.Fragment;
 var nodeIndex = domUtil.nodeIndex;
+var stealFragmentChildren = domUtil.stealFragmentChildren;
 
 /**
  * Utility functions for children functions.
@@ -31,13 +32,6 @@ function assertValidChildren(node, children) {
   for (var ii = children.length - 1; ii--; ) {
     assertValidChild(node, children[ii]);
   }
-}
-
-function stealFragmentChildren(node, fragment) {
-  for (var ii = fragment.__.childNodes.length - 1; ii--; ) {
-    fragment.__.childNodes[ii].__.parentNode = node;
-  }
-  fragment.__.childNodes = [];
 }
 
 /**
@@ -115,7 +109,7 @@ defineProperties(NodeWithChildren.prototype, {
   appendChild: function(newChild) {
     if (newChild instanceof Fragment) {
       assertValidChildren(this, newChild.__.childNodes);
-      this.__.childNodes.concat(newChild);
+      this.__.childNodes.push.apply(this.__.childNodes, newChild.__.childNodes);
       stealFragmentChildren(this, newChild);
     } else {
       assertValidChild(this, newChild);

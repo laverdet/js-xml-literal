@@ -2,16 +2,21 @@ this.ctorElement = ctorElement;
 this.ctorList = ctorList;
 
 var util = require('./util');
+var domUtil = require('./dom-util');
 var environment = require('./environment');
 var node = require('./node');
 var element = require('./element');
 var text = require('./text');
+var fragment = require('./fragment');
 
 var beget = util.beget;
 var toString = util.toString;
+var stealFragmentChildren = domUtil.stealFragmentChildren;
 var Node = node.Node;
 var ElementCtor = element.ElementCtor;
 var TextCtor = text.TextCtor;
+var Fragment = fragment.Fragment;
+var FragmentCtor = fragment.FragmentCtor;
 var XMLEnvironment = environment.XMLEnvironment;
 
 /**
@@ -30,8 +35,9 @@ function ctorElement(element) {
   return generateChildren([element], env._namespaces, env._factories, null)[0];
 }
 
-function ctorList(element) {
-  var list = new XMLList;
+function ctorList(elements) {
+  var list = new FragmentCtor;
+  var env = XMLEnvironment.get();
   list.__.childNodes = generateChildren(elements, env._namespaces, env._factories, list);
   return list;
 }
@@ -116,13 +122,17 @@ function generateChildren(descriptors, namespaces, factories, parentNode) {
 
         // generate children
         var children = descriptor.content ?
-          generateChildren(descriptor.content, currentNamespaces, element) : [];
+          generateChildren(descriptor.content, currentNamespaces, factories, element) : [];
         element.__.childNodes = children;
         elements.push(element);
         break;
 
       case 3: // TYPE_EXPR
-        if (descriptor.value instanceof Node) {
+        if (descriptor.value instanceof Fragment) {
+          elements.push.apply(elements, descriptor.value.__.childNodes);
+          stealFragmentChildren(parentNode, descriptor.value);
+          break;
+        } else if (descriptor.value instanceof Node) {
           elements.push(descriptor.value);
           element.__.parentNode = parentNode;
           break;

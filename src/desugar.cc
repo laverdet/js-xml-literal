@@ -153,7 +153,7 @@ class XMLDesugarWalker : public NodeWalker {
         // XML list
         assert(attrs == NULL);
         assert(close_name == NULL);
-        replace(content);
+        replace(runtime_fn("ctorList", 1, content));
       } else {
         // XML element
         Node* new_node;

@@ -1,4 +1,5 @@
 this.nodeIndex = nodeIndex;
+this.stealFragmentChildren = stealFragmentChildren;
 this.escapeElementValue = escapeElementValue;
 this.escapeAttributeValue = escapeAttributeValue;
 
@@ -15,6 +16,13 @@ function nodeIndex(parentNode, node) {
     return node.__.index = parentNode.__.childNodes.indexOf(node);
   }
   return index;
+}
+
+function stealFragmentChildren(node, fragment) {
+  for (var ii = fragment.__.childNodes.length - 1; --ii >= 0; ) {
+    fragment.__.childNodes[ii].__.parentNode = node;
+  }
+  fragment.__.childNodes = [];
 }
 
 function escapeElementValue(val) {
