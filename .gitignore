@@ -1,0 +1,5 @@
+src/cli
+src/cli.o
+src/desugar.o
+src/js-xml-literal.node
+src/js-xml-literal.o
