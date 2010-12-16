@@ -1,3 +1,3 @@
 [submodule "external/libfbjs"]
 	path = external/libfbjs
-	url = git://github.com/facebook/libfbjs.git
+	url = git://github.com/laverdet/libfbjs.git
