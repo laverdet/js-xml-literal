@@ -1,18 +1,16 @@
 this.Element = Element;
-this.ElementCtor = ElementCtor;
 this.ElementData = ElementData;
 
-var domUtil = require('./dom-util');
 var util = require('./util');
-var environment = require('./environment');
+var environment = require('../environment');
 var nodeWithChildren = require('./node-with-children');
 
-var escapeAttributeValue = domUtil.escapeAttributeValue;
 var beget = util.beget;
+var ToString = util.ToString;
+var extend = util.extend;
+var escapeAttributeValue = util.escapeAttributeValue;
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
-var extend = util.extend;
-var toString = util.toString;
 var XMLEnvironment = environment.XMLEnvironment;
 var NodeWithChildren = nodeWithChildren.NodeWithChildren;
 var NodeWithChildrenData = nodeWithChildren.NodeWithChildrenData;
@@ -31,25 +29,21 @@ function indent(level) {
 /**
  * `Element` node. Represents a named element.
  */
-function Element() {
-  NodeWithChildren.call(this); // throws
+function Element(chidren, nodeName, namespaceURI, attributes, attributesNS) {
+  Object.defineProperty(this, '__', {
+    value: new ElementData(chidren, nodeName, namespaceURI, attributes, attributesNS),
+  });
 }
 extend(Element, NodeWithChildren);
 
-function ElementData(parentNode, nodeName, namespaceURI) {
-  NodeWithChildrenData.call(this, parentNode);
-  this.attributes = {};
-  this.nodeName = nodeName;
+function ElementData(children, nodeName, namespaceURI, attributes, attributesNS) {
+  NodeWithChildrenData.call(this, children);
+  this.attributes = attributes;
+  this.attributesNS = attributesNS;
   this.namespaceURI = namespaceURI;
+  this.nodeName = nodeName;
 }
 extend(ElementData, NodeWithChildrenData);
-
-function ElementCtor(parentNode, nodeName, namespaceURI) {
-  Object.defineProperty(this, '__', {
-    value: new ElementData(parentNode, nodeName, namespaceURI),
-  });
-}
-ElementCtor.prototype = Element.prototype;
 
 Object.defineProperty(Element.prototype, '_selfClosing', {
   value: true,
@@ -87,7 +81,7 @@ function elementToString(el, namespaces, usedNamespaces, pretty, level, first) {
     } else if (el.__.attributes[ii] === false) {
       continue;
     } else {
-      val = escapeAttributeValue(toString(el.__.attributes[ii]));
+      val = escapeAttributeValue(ToString(el.__.attributes[ii]));
     }
     str += ' ' + ii + '="' + val + '"';
   }
@@ -101,7 +95,7 @@ function elementToString(el, namespaces, usedNamespaces, pretty, level, first) {
       } else if (el.__.attributesNS[uri][ii] === false) {
         continue;
       } else {
-        val = escapeAttributeValue(toString(el.__.attributesNS[uri][ii]));
+        val = escapeAttributeValue(ToString(el.__.attributesNS[uri][ii]));
       }
       usedNamespaces[uri] = true;
       str += ' ' + resolvePrefix(uri, namespaces) + ':' + ii + '="' + val + '"';
@@ -143,7 +137,7 @@ function elementToString(el, namespaces, usedNamespaces, pretty, level, first) {
 }
 
 function normalizeName(name) {
-  name = toString(name);
+  name = ToString(name);
   if (!/^[A-Za-z_][A-Za-z_\-.0-9]*$/.test(name)) {
     throw new TypeError('XML name contains an invalid character');
   }
@@ -160,22 +154,18 @@ defineProperties(Element.prototype, {
   },
 
   getAttributeNS: function(uri, attr) {
-    uri = toString(uri);
+    uri = ToString(uri);
     if (uri === '') {
       return this.getAttribute(attr);
     }
-    if (!this.__.attributesNS) {
-      this.__.attributesNS = {};
-    }
-    if (uri in this.__.attributesNS) {
+    if (this.__.attributesNS && (uri in this.__.attributesNS)) {
       return this.__.attributesNS[uri][normalizeName(attr)];
-    } else {
-      return undefined;
     }
+    return undefined;
   },
 
   setAttributeNS: function(uri, attr, val) {
-    uri = toString(uri);
+    uri = ToString(uri);
     if (uri === '') {
       return this.setAttribute(attr, val);
     }

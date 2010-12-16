@@ -4,17 +4,16 @@ this.NodeWithChildrenData = NodeWithChildrenData;
 var util = require('./util');
 var node = require('./node');
 var fragment = require('./fragment');
-var domUtil = require('./dom-util');
 
+var extend = util.extend;
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
 var beget = util.beget;
-var extend = util.extend;
 var Node = node.Node;
 var NodeData = node.NodeData;
 var Fragment = fragment.Fragment;
-var nodeIndex = domUtil.nodeIndex;
-var stealFragmentChildren = domUtil.stealFragmentChildren;
+var nodeIndex = util.nodeIndex;
+var stealFragmentChildren = util.stealFragmentChildren;
 
 /**
  * Utility functions for children functions.
@@ -38,13 +37,12 @@ function assertValidChildren(node, children) {
  * `NodeWithChildren` node. Subclasses of this may contain children.
  */
 function NodeWithChildren() {
-  Node.call(this); // throws
 }
 extend(NodeWithChildren, Node);
 
-function NodeWithChildrenData(parentNode) {
-  NodeData.call(this, parentNode);
-  this.childNodes = [];
+function NodeWithChildrenData(children) {
+  NodeData.call(this);
+  this.childNodes = children;
 }
 extend(NodeWithChildrenData, NodeData);
 

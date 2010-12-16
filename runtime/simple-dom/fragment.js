@@ -1,5 +1,4 @@
 this.Fragment = Fragment;
-this.FragmentCtor = FragmentCtor;
 
 var util = require('./util');
 var nodeWithChildren = require('./node-with-children');
@@ -12,20 +11,15 @@ var NodeWithChildrenData = nodeWithChildren.NodeWithChildrenData;
 /**
  * Document fragment.
  */
-function Fragment() {
-  throw new Fragment;
-}
-extend(Fragment, NodeWithChildren);
-
-function FragmentCtor() {
+function Fragment(children) {
   Object.defineProperty(this, '__', {
-    value: new NodeWithChildrenData(null),
+    value: new NodeWithChildrenData(children),
     writeable: false,
     configurable: false,
     enumerable: false
   });
 }
-FragmentCtor.prototype = Fragment.prototype;
+extend(Fragment, NodeWithChildren);
 
 defineProperties(Fragment.prototype, {
   toString: function(pretty) {

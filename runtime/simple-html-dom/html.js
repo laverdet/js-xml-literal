@@ -1,7 +1,7 @@
 /**
- * Definitions for HTML documents.
+ * Extension to bring support for HTML elements to Simple DOM.
  */
-var toolkit = require('./toolkit');
+var toolkit = require('../simple-dom/toolkit');
 
 var e = toolkit.createElementCtor;
 var attrs = toolkit.defineAttributeAccessors;
@@ -15,11 +15,10 @@ function selfClosing(el, val) {
 
 var HTMLElement = e();
 selfClosing(HTMLElement, false);
-attrs(HTMLElement, ['dir', 'id', 'lang', 'style', 'title']);
+attrs(HTMLElement, [{'className': 'class'}, 'dir', 'id', 'lang', 'style', 'title']);
 attrs(HTMLElement, [
   'onblur', 'onclick', 'ondblclick', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup', 'onmousedown',
   'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onresize']);
-attrs(HTMLElement, {'class': 'className'});
 
 var HTMLAnchorElement = e(null, HTMLElement);
 attrs(HTMLAnchorElement, [
@@ -83,9 +82,9 @@ attrs(HTMLFontElement, ['color', 'face', 'size']);
 
 var HTMLFormElement = e(null, HTMLElement);
 attrs(HTMLFormElement, [
-  'acceptCharset', 'action', 'autocomplete', 'enctype', 'method', 'name', 'target']);
+  'acceptCharset', 'action', 'autocomplete', {'encoding': 'enctype'}, 'enctype', 'method', 'name',
+  'target']);
 attrs(HTMLFormElement, ['onreset', 'onsubmit']);
-attrs(HTMLFormElement, {'encoding': 'enctype'});
 
 var HTMLFrameElement = e(null, HTMLElement);
 attrs(HTMLFrameElement, [
@@ -133,8 +132,7 @@ var HTMLKeygenElement = e(null, HTMLElement);
 attrs(HTMLKeygenElement, ['autofocus', 'challenge', 'disabled', 'keytype', 'name', 'type']);
 
 var HTMLLabelElement = e(null, HTMLElement);
-attrs(HTMLLabelElement, ['accessKey']);
-attrs(HTMLLabelElement, {'htmlFor': 'for'});
+attrs(HTMLLabelElement, ['accessKey', {'htmlFor': 'for'}]);
 
 var HTMLLIElement = e(null, HTMLElement);
 attrs(HTMLLIElement, ['type', 'value']);

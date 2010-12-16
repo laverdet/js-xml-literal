@@ -13,7 +13,7 @@ var CharacterDataData = characterData.CharacterDataData;
  */
 function UnescapedData(data) {
   Object.defineProperty(this, '__', {
-    value: new CharacterDataData(null, data),
+    value: new CharacterDataData(data),
   });
 }
 extend(UnescapedData, CharacterData);

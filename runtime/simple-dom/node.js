@@ -2,21 +2,19 @@ this.Node = Node;
 this.NodeData = NodeData;
 
 var util = require('./util');
-var domUtil = require('./dom-util');
 
 var defineProperties = util.defineProperties;
 var defineGetters = util.defineGetters;
-var nodeIndex = domUtil.nodeIndex;
+var nodeIndex = util.nodeIndex;
 
 /**
  * Abstract `Node` class.
  */
 function Node() {
-  throw new TypeError('Illegal constructor');
 }
 
-function NodeData(parentNode) {
-  this.parentNode = parentNode;
+function NodeData() {
+  this.parentNode = null;
 }
 
 var stubs = [

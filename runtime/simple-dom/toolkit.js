@@ -1,14 +1,15 @@
 /**
  * Library for 3rd parties to define their own elements.
  */
-this.defineAttributeAccessors = defineAttributeAccessors;
-this.createElementCtor = createElementCtor;
-
-var element = require('./element');
 var util = require('./util');
 
+this.defineAttributeAccessors = defineAttributeAccessors;
+this.createElementCtor = createElementCtor;
+this.sealConstructor = util.sealConstructor;
+
+var element = require('./element');
+
 var Element = element.Element;
-var ElementCtor = element.ElementCtor;
 var extend = util.extend;
 
 /**
@@ -19,7 +20,7 @@ var extend = util.extend;
  */
 function createElementCtor(ctor, base) {
   function F() {
-    ElementCtor.apply(this, arguments);
+    Element.apply(this, arguments);
     if (ctor) {
       ctor.call(ctor);
     }
@@ -39,7 +40,13 @@ function defineAttributeAccessors(obj, getters) {
   if (getters instanceof Array) {
     var map = {};
     for (var ii = 0; ii < getters.length; ++ii) {
-      map[getters[ii]] = getters[ii];
+      if (typeof getters[ii] === 'string') {
+        map[getters[ii]] = getters[ii];
+      } else {
+        for (var jj in getters[ii]) {
+          map[jj] = getters[ii][jj];
+        }
+      }
     }
     defineAttributeAccessors(obj, map);
   } else {

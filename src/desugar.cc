@@ -29,13 +29,17 @@ class XMLDesugarWalker : public NodeWalker {
 
     /**
      * Creates a node that's like
-     * __E4X.<fn>(<args>)
+     * XMLEnvironment.get().<fn>(<args>)
      */
     static Node* runtime_fn(const char* fn, const unsigned int va_count, ...) {
       Node* args = new NodeArgList;
       Node* call = (new NodeFunctionCall)
         ->appendChild((new NodeStaticMemberExpression)
-          ->appendChild(new NodeIdentifier("__E4X"))
+          ->appendChild((new NodeFunctionCall)
+            ->appendChild((new NodeStaticMemberExpression)
+              ->appendChild(new NodeIdentifier("XMLEnvironment"))
+              ->appendChild(new NodeIdentifier("get")))
+            ->appendChild(new NodeArgList))
           ->appendChild(new NodeIdentifier(fn)))
         ->appendChild(args);
 
@@ -141,7 +145,7 @@ class XMLDesugarWalker : public NodeWalker {
     }
 
     virtual void visit(NodeXMLElement& node) {
-      // Decode XML literals into an object literal descriptor and pass that through ctorElement.
+      // Decode XML literals into an object literal descriptor and pass that through _el.
       visitChildren();
 
       Node* name = node.removeChild(node.childNodes().begin());
@@ -153,7 +157,7 @@ class XMLDesugarWalker : public NodeWalker {
         // XML list
         assert(attrs == NULL);
         assert(close_name == NULL);
-        replace(runtime_fn("ctorList", 1, content));
+        replace(runtime_fn("_frag", 1, content));
       } else {
         // XML element
         Node* new_node;
@@ -167,7 +171,7 @@ class XMLDesugarWalker : public NodeWalker {
           ->appendChild(object_property("attributes", attrs))
           ->appendChild(object_property("content", content));
         if (!dynamic_cast<NodeXMLContentList*>(parent()->node())) {
-          new_node = runtime_fn("ctorElement", 1, new_node);
+          new_node = runtime_fn("_el", 1, new_node);
         }
         replace(new_node);
       }
@@ -235,7 +239,8 @@ class XMLDesugarWalker : public NodeWalker {
 };
 
 const string desugar(const string &code) {
-  NodeProgram root(code.c_str(), (node_parse_enum)(PARSE_TYPEHINT | PARSE_OBJECT_LITERAL_ELISON | PARSE_E4X));
+  NodeProgram root(code.c_str(), (node_parse_enum)(
+    PARSE_TYPEHINT | PARSE_OBJECT_LITERAL_ELISON | PARSE_E4X | PARSE_ACCESSORS));
   XMLDesugarWalker walker;
   assert(&root == walker.walk(&root));
   rope_t new_code = root.render(RENDER_PRETTY | RENDER_MAINTAIN_LINENO);

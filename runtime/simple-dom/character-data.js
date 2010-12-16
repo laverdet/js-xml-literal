@@ -13,23 +13,18 @@ var NodeData = node.NodeData;
 /**
  * Abstract `CharacterData` node. This is for `Text`, and `Comment` nodes.
  */
-function CharacterData() {
-  Node.call(this); // throws
+function CharacterData(data) {
+  Object.defineProperty(this, '__', {
+    value: new CharacterDataData(data),
+  });
 }
 extend(CharacterData, Node);
 
-function CharacterDataData(parentNode, data) {
-  NodeData.call(this, parentNode);
+function CharacterDataData(data) {
+  NodeData.call(this);
   this.data = data;
 }
 extend(CharacterDataData, NodeData);
-
-function CharacterDataCtor(parentNode, data) {
-  Object.defineProperty(this, '__', {
-    value: new CharacterDataData(parentNode, data),
-  });
-}
-CharacterDataCtor.prototype = CharacterData.prototype;
 
 defineProperties(CharacterData.prototype, {
   appendData: function(data) {

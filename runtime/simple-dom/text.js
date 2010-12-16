@@ -1,30 +1,23 @@
 this.Text = Text;
-this.TextCtor = TextCtor;
 
-var domUtil = require('./dom-util');
 var util = require('./util');
 var characterData = require('./character-data');
 
-var escapeElementValue = domUtil.escapeElementValue;
-var defineProperties = util.defineProperties;
 var extend = util.extend;
+var escapeElementValue = util.escapeElementValue;
+var defineProperties = util.defineProperties;
 var CharacterData = characterData.CharacterData;
 var CharacterDataData = characterData.CharacterDataData;
 
 /**
  * `Text` node. For text in the DOM.
  */
-function Text() {
-  CharacterData.call(this); // throws
-}
-extend(Text, CharacterData);
-
-function TextCtor(parentNode, data) {
+function Text(data) {
   Object.defineProperty(this, '__', {
-    value: new CharacterDataData(parentNode, data),
+    value: new CharacterDataData(data),
   });
 }
-TextCtor.prototype = Text.prototype;
+extend(Text, CharacterData);
 
 defineProperties(Text.prototype, {
   toString: function() {

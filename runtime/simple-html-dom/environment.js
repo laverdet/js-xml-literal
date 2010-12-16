@@ -1,52 +1,50 @@
-var literal = require('./literal');
-var node = require('./node');
-var element = require('./element');
-var characterData = require('./character-data');
-var text = require('./text');
-var unescapedData = require('./unescaped-data');
-var environment = require('./environment');
 var html = require('./html');
-var desugar = require('js-xml-literal').desugar;
+var simpleEnvironment = require('../simple-dom/environment');
+var toolkit = require('../simple-dom/toolkit');
+var util = require('../simple-dom/util');
 
-// Exports
-var XMLEnvironment = environment.XMLEnvironment;
-this.Node = node.Node;
-this.Element = element.Element;
-this.CharacterData = characterData.CharacterData;
-this.Text = text.Text;
-this.UnsafeUnescapedData = unescapedData.UnescapedData;
-this.XMLEnvironment = environment.XMLEnvironment;
-global.__E4X = this.__E4X = {
-  ctorElement: literal.ctorElement,
-  ctorList: literal.ctorList,
-};
+var sealConstructor = toolkit.sealConstructor;
+var XMLEnvironment = require('../environment').XMLEnvironment;
+var SimpleDOMXMLEnvironment = simpleEnvironment.SimpleDOMXMLEnvironment;
+var extend = util.extend;
+var defineProperties = util.defineProperties;
 
-// Register which file extensions will pass through the desugarer
-this.register = function(ext) {
-  var fs = require('fs');
-  require.extensions['.' + ext] = function(module, filename) {
-    var src = fs.readFileSync(filename, 'utf8');
-    try {
-      src = desugar(src);
-    } catch(e) {
-      throw new SyntaxError(filename + '\n' + e);
-    }
-    module._compile(src, filename);
-  }
+this.Node = simpleEnvironment.Node;
+this.Element = simpleEnvironment.Element;
+this.CharacterData = simpleEnvironment.CharacterData;
+this.Text = simpleEnvironment.Text;
+this.Fragment = simpleEnvironment.Fragment;
+for (var ii in html) {
+  // todo: leakage?
+  this[ii] = sealConstructor(html[ii]);
 }
 
-// Create a default environment
-var env = new XMLEnvironment;
-env.registerPrefix('', 'http://www.w3.org/1999/xhtml');
-env.registerFactory('http://www.w3.org/1999/xhtml', htmlFactory);
-XMLEnvironment.push(env);
+/**
+ * Layer on top of SimpleDOMXMLEnvironment which adds support for HTML elements. This means you
+ * can use simple accessors like `div.className = 'foo'` instead of having to do
+ * `div.setAttribute('class', 'foo')`.
+ */
+this.SimpleHTMLDOMXMLEnvironment = SimpleHTMLDOMXMLEnvironment;
+function SimpleHTMLDOMXMLEnvironment(uri) {
+  SimpleDOMXMLEnvironment.call(this);
+  this.uri = uri || 'http://www.w3.org/1999/xhtml';
+  this.registerPrefix('', this.uri);
+}
+extend(SimpleHTMLDOMXMLEnvironment, SimpleDOMXMLEnvironment);
 
-// HTML factory
-function htmlFactory(tagName) {
-  if (tagName in elements) {
-    return elements[tagName];
+SimpleHTMLDOMXMLEnvironment.prototype.createElement =
+function(uri, nodeName, children, attributes, attributesNS) {
+  if (this.uri === uri) {
+    nodeName = nodeName.toLowerCase();
+    if (nodeName in elements) {
+      return new elements[nodeName](children || [], nodeName, uri, attributes || {}, attributesNS);
+    } else {
+      return new HTMLUnknownElement(children || [], nodeName, uri, attributes || {}, attributesNS);
+    }
+  } else {
+    return SimpleDOMXMLEnvironment.prototype.createElement.call(
+      this, uri, nodeName, children, attributes, attributesNS);
   }
-  return HTMLUnknownElement;
 }
 
 var elements = {

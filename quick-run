@@ -1,8 +1,15 @@
 #!/opt/node/bin/node
 // Quick wrapper script for running with dom literal support in NodeJS
 // Usage: ./quick-run <file>
+
+// Setup environment
 require.paths.push('./src');
-require('./runtime/runtime').register('js');
+require('./runtime/node-runtime').register('js');
+var SimpleHTMLDOMXMLEnvironment =
+  require('./runtime/simple-html-dom/environment.js').SimpleHTMLDOMXMLEnvironment;
+XMLEnvironment.set(new SimpleHTMLDOMXMLEnvironment);
+
+// Run file
 var arg = process.argv[2];
 if (!arg) {
   require('util').print('No input file specified!');
