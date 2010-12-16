@@ -19,8 +19,8 @@ var extend = util.extend;
  * must also use this function, and pass your base class via the second parameter.
  */
 function createElementCtor(ctor, base) {
-  function F() {
-    Element.apply(this, arguments);
+  function F(nodeName, namespaceURI, attributes, attributesNS) {
+    Element.call(this, nodeName, namespaceURI, attributes, attributesNS);
     if (ctor) {
       ctor.call(ctor);
     }

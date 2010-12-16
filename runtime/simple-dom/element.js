@@ -29,15 +29,15 @@ function indent(level) {
 /**
  * `Element` node. Represents a named element.
  */
-function Element(chidren, nodeName, namespaceURI, attributes, attributesNS) {
+function Element(nodeName, namespaceURI, attributes, attributesNS) {
   Object.defineProperty(this, '__', {
-    value: new ElementData(chidren, nodeName, namespaceURI, attributes, attributesNS),
+    value: new ElementData(nodeName, namespaceURI, attributes, attributesNS),
   });
 }
 extend(Element, NodeWithChildren);
 
-function ElementData(children, nodeName, namespaceURI, attributes, attributesNS) {
-  NodeWithChildrenData.call(this, children);
+function ElementData(nodeName, namespaceURI, attributes, attributesNS) {
+  NodeWithChildrenData.call(this);
   this.attributes = attributes;
   this.attributesNS = attributesNS;
   this.namespaceURI = namespaceURI;

@@ -36,11 +36,8 @@ SimpleHTMLDOMXMLEnvironment.prototype.createElement =
 function(uri, nodeName, children, attributes, attributesNS) {
   if (this.uri === uri) {
     nodeName = nodeName.toLowerCase();
-    if (nodeName in elements) {
-      return new elements[nodeName](children || [], nodeName, uri, attributes || {}, attributesNS);
-    } else {
-      return new HTMLUnknownElement(children || [], nodeName, uri, attributes || {}, attributesNS);
-    }
+    var ctor = (nodeName in elements) ? elements[nodeName] : HTMLUnknownElement;
+    return this.constructElement(ctor, uri, nodeName, children, attributes, attributesNS);
   } else {
     return SimpleDOMXMLEnvironment.prototype.createElement.call(
       this, uri, nodeName, children, attributes, attributesNS);

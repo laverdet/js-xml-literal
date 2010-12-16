@@ -46,33 +46,33 @@ defineProperties(SimpleDOMXMLEnvironment.prototype, {
   },
 
   createElement: function(uri, nodeName, children, attributes, attributesNS) {
-    children = children || [];
-    var el = new Element(children, nodeName, uri, attributes || {}, attributesNS);
-    becomeParent(children, el);
-    return el;
+    return this.constructElement(Element, uri, nodeName, children, attributes, attributesNS);
   },
 
   createFragment: function(children) {
-    children = children || [];
-    var frag = new Fragment(children);
-    becomeParent(children, frag);
+    var frag = new Fragment();
+    if (children) {
+      for (var ii = 0; ii < children.length; ++ii) {
+        frag.appendChild(children[ii]);
+      }
+    }
     return frag;
   },
 
   createTextNode: function(data) {
     return new Text(data);
   },
-});
 
-/**
- * Become the parent of an array of children. Removes children from their parent if they have a
- * parent.
- */
-function becomeParent(children, parentNode) {
-  for (var ii = children.length - 1; --ii >= 0;) {
-    if (children[ii].__.parentNode) {
-      children[ii].__.parentNode.removeChild(children[ii]);
+  constructElement: function(ctor, uri, nodeName, children, attributes, attributesNS) {
+    var el = new ctor(nodeName, uri, attributes || {}, attributesNS);
+    if (children) {
+      if (children.length === 1) {
+        el.appendChild(children[0]);
+      } else {
+        el.appendChild(this.createFragment(children));
+      }
     }
-    children[ii].__.parentNode = parentNode;
+    return el;
+
   }
-}
+});

@@ -79,7 +79,7 @@ function nodeIndex(parentNode, node) {
  * children to an empty array.
  */
 function stealFragmentChildren(node, fragment) {
-  for (var ii = fragment.__.childNodes.length - 1; --ii >= 0; ) {
+  for (var ii = fragment.__.childNodes.length; ii--; ) {
     fragment.__.childNodes[ii].__.parentNode = node;
   }
   fragment.__.childNodes = [];

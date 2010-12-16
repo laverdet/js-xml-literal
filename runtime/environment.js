@@ -119,7 +119,7 @@
 
           // Generate attributes
           if (keys) {
-            var attributes = undefined, attributesNS = undefined;
+            var attributes = {}, attributesNS = undefined;
             for (var jj = 0; jj < keys.length; ++jj) {
               var attrName = parseXMLName(keys[jj]);
               if (attrName[1]) {
@@ -173,7 +173,7 @@
           if (this.ignoreWhitespace) {
             // Hairbrained whitespace logic
             if (descriptors.length !== 1) {
-              descriptor.value = descriptor.value.replace(whitespaceRegex, '');
+              descriptor.value = descriptor.value.replace(whitespaceRegex, ' ');
             } else if (allWhitespaceRegex.test(descriptor.value)) {
               continue;
             }
@@ -195,7 +195,7 @@
    */
   var xmlnsRegex = /^xmlns(?:$|:)/,
       xmlNameRegex = /^(?:([a-zA-Z_][a-zA-Z0-9_.\-]*):)?([a-zA-Z_][a-zA-Z0-9_.\-]*)$/,
-      whitespaceRegex = /^[ \t\r\n]+|[ \t\r\n]+$/g,
+      whitespaceRegex = /^[ \t\r\n]{2,}|[ \t\r\n]{2,}$/g,
       allWhitespaceRegex = /^[ \t\r\n]+$/g;
       undefined;
   function ToString(expr) {

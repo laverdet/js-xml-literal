@@ -3,7 +3,6 @@ this.NodeWithChildrenData = NodeWithChildrenData;
 
 var util = require('./util');
 var node = require('./node');
-var fragment = require('./fragment');
 
 var extend = util.extend;
 var defineProperties = util.defineProperties;
@@ -11,7 +10,6 @@ var defineGetters = util.defineGetters;
 var beget = util.beget;
 var Node = node.Node;
 var NodeData = node.NodeData;
-var Fragment = fragment.Fragment;
 var nodeIndex = util.nodeIndex;
 var stealFragmentChildren = util.stealFragmentChildren;
 
@@ -28,7 +26,7 @@ function assertValidChild(node, child) {
 }
 
 function assertValidChildren(node, children) {
-  for (var ii = children.length - 1; ii--; ) {
+  for (var ii = children.length; ii--; ) {
     assertValidChild(node, children[ii]);
   }
 }
@@ -40,9 +38,9 @@ function NodeWithChildren() {
 }
 extend(NodeWithChildren, Node);
 
-function NodeWithChildrenData(children) {
+function NodeWithChildrenData() {
   NodeData.call(this);
-  this.childNodes = children;
+  this.childNodes = [];
 }
 extend(NodeWithChildrenData, NodeData);
 
@@ -150,3 +148,7 @@ defineGetters(NodeWithChildren.prototype, {
     }
   },
 });
+
+// Only used at run time; avoid circular dependency issues.
+var fragment = require('./fragment');
+var Fragment = fragment.Fragment;

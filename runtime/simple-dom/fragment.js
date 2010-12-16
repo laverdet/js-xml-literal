@@ -11,9 +11,9 @@ var NodeWithChildrenData = nodeWithChildren.NodeWithChildrenData;
 /**
  * Document fragment.
  */
-function Fragment(children) {
+function Fragment() {
   Object.defineProperty(this, '__', {
-    value: new NodeWithChildrenData(children),
+    value: new NodeWithChildrenData(),
     writeable: false,
     configurable: false,
     enumerable: false
