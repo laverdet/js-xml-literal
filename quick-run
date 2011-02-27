@@ -6,16 +6,16 @@
 require.paths.push('./src');
 require('./runtime/node-runtime').register('js');
 var SimpleHTMLDOMXMLEnvironment =
-  require('./runtime/simple-html-dom/environment.js').SimpleHTMLDOMXMLEnvironment;
+	require('./runtime/simple-html-dom/environment.js').SimpleHTMLDOMXMLEnvironment;
 XMLEnvironment.set(new SimpleHTMLDOMXMLEnvironment);
 
 // Run file
 var arg = process.argv[2];
 if (!arg) {
-  require('util').print('No input file specified!');
+	require('util').print('No input file specified!');
 }
 var fs = require('fs');
 if (fs.statSync(arg)) {
-  arg = fs.realpathSync(arg).replace(/\.[^.]+$/, '');
+	arg = fs.realpathSync(arg).replace(/\.[^.]+$/, '');
 }
 require(arg);
