@@ -59,6 +59,13 @@ defineProperties(NodeWithChildren.prototype, {
         childNodes.splice.apply(childNodes, [index, 0].concat(newChild.__.childNodes));
       }
       stealFragmentChildren(this, newChild);
+    } else if (newChild instanceof Array) {
+      assertValidChildren(this, newChild);
+      if (index === -1) {
+        childNodes.unshift.apply(childNodes, newChild);
+      } else {
+        childNodes.splice.apply(childNodes, [index, 0].concat(newChild));
+      }
     } else {
       assertValidChild(this, newChild);
       if (index === -1) {
@@ -77,8 +84,11 @@ defineProperties(NodeWithChildren.prototype, {
     }
     if (newChild instanceof Fragment) {
       assertValidChildren(this, newChild.__.childNodes);
-      this.__.childNodes.splice(index, 1, newChild);
+      this.__.childNodes.splice(index, 1, newChild.__.childNodes);
       stealFragmentChildren(this, newChild);
+    } else if (newChild instanceof Array) {
+      assertValidChildren(this, newChild);
+      this.__.childNodes.splice(index, 1, newChild);
     } else {
       assertValidChild(this, newChild);
       if (newChild.__.parentNode) {
@@ -107,6 +117,9 @@ defineProperties(NodeWithChildren.prototype, {
       assertValidChildren(this, newChild.__.childNodes);
       this.__.childNodes.push.apply(this.__.childNodes, newChild.__.childNodes);
       stealFragmentChildren(this, newChild);
+    } else if (newChild instanceof Array) {
+      assertValidChildren(this, newChild);
+      this.__.childNodes.push.apply(this.__.childNodes, newChild.slice());
     } else {
       assertValidChild(this, newChild);
       this.__.childNodes.push(newChild);

@@ -18,17 +18,21 @@ function NodeData() {
 }
 
 var stubs = [
-  'insertBefore', 'replaceChild', 'removeChild', 'appendChild', 'hasChildNodes', 'cloneNode'
+  'insertBefore', 'replaceChild', 'removeChild', 'appendChild', 'cloneNode'
 ];
-for (var ii in stubs) {
+for (var ii = 0; ii < stubs.length; ++ii) {
   Node.prototype[ii] = function() { throw new Error; };
+}
+
+Node.prototype.hasChildNodes = function() {
+  return false;
 }
 
 var properties = [
   'nodeName', 'nodeValue', 'nodeType', 'childNodes', 'firstChild', 'lastChild', 'attributes',
   'namespaceURI'
 ];
-for (var ii in properties) {
+for (var ii = 0; ii < properties.length; ++ii) {
   Object.defineProperty(Node.prototype, properties[ii], {
     get: function() { return null; },
     enumerable: true,

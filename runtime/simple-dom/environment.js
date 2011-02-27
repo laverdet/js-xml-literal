@@ -42,7 +42,7 @@ defineProperties(SimpleDOMXMLEnvironment.prototype, {
   },
 
   isNode: function(node) {
-    return node instanceof Node;
+    return node instanceof Node || node instanceof Array;
   },
 
   createElement: function(uri, nodeName, children, attributes, attributesNS) {
@@ -73,6 +73,5 @@ defineProperties(SimpleDOMXMLEnvironment.prototype, {
       }
     }
     return el;
-
   }
 });
