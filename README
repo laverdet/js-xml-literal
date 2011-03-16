@@ -1,14 +1,69 @@
-DOM literal support for JavaScript via desugaring.
+xml-literals(1) -- XML literals in Javascript
+=============================================
+
+INSTALLING
+----------
+
+To install xml-literals:
+
+	npm install xml-literals
 
 
-To build this software:
+INTRODUCTION
+------------
 
-	git submodule init
-	git submodule update
-	cd src
-	make
+`xml-literals` adds support for XML literals to Javascript by means of simple code transformations.
+Since it is based on desugaring syntax, you can use XML literals in _any_ Javascript environment
+(Internet Explorer 6.0, Chrome 10, whatever). This library focuses on adding support to NodeJS, but
+I'll include some hints as to how to get this to work in a browser.
+
+Here's an example of an XML literal:
+
+	var anchor = <a href={href}>Hello</a>;
+
+This kind of syntax is more concise than something like:
+
+	var anchor = document.createElement('a');
+	anchor.href = href;
+	anchor.appendChild(document.createTextNode('Hello'));
+
+And safer (and more flexible) than something like:
+
+	var anchor = '<a href="' +href +'">Hello</a>';
+
+All literals which appear in your source code will go through an `XMLEnvironment` which defines how
+the literal should be interpreted. This environment should interpret the literal into a constructor
+for some other DOM. See the documentation in lib/environment.js for more information on
+`XMLEnvironment`. `js-xml-literals` includes two environments for you to get started with. However
+if you want to implement something interesting like element decomposition you will need to learn how
+to create your own environment.
 
 
-To get started quickly, see quick-run:
+GETTING STARTED
+---------------
 
-	./quick-run <script>
+The first step to get XML literals working in your project is to register which file extensions
+should be transformed. If you want to allow XML literals in any Javascript file you would do this:
+
+	require('xml-literals').register('js');
+
+This tells NodeJS to preprocess all *.js files with the XML literals transformation. Note that while
+I haven't run into any problems with this yet, this will cause ALL your Javascript to run through a
+transformation. Any bugs in this library may manifest themselves in other libraries.
+
+Unfortunately you won't be able to use XML literals in the file where you invoked the registration,
+so this kind of thing won't work:
+
+	init.js:
+		require('xml-literals').register('js');
+		// WON'T WORK!!
+		var test = <span>Hello</span>;
+
+After registering a file extension you must setup the `XMLEnvironment`. If you want to use the
+included simple-html-dom (recommended) you would do this:
+
+	var SimpleHTMLDOMXMLEnvironment = require('xml-literals/simple-html-dom');
+	XMLEnvironment.set(new SimpleHTMLDOMXMLEnvironment);
+
+Then just `require()` your main script and it will have XML literals enabled.
+
