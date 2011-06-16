@@ -205,9 +205,13 @@ class XMLDesugarWalker : public NodeWalker {
 		virtual void visit(NodeXMLEmbeddedExpression& node) {
 			visitChildren();
 			Node* expr = node.removeChild(node.childNodes().begin());
-			replace((new NodeObjectLiteral)
-				->appendChild(object_property("type", new NodeNumericLiteral(TYPE_EXPR)))
-				->appendChild(object_property("value", expr)));
+			if (dynamic_cast<NodeXMLAttribute*>(parent()->node())) {
+				replace(expr);
+			} else {
+				replace((new NodeObjectLiteral)
+					->appendChild(object_property("type", new NodeNumericLiteral(TYPE_EXPR)))
+					->appendChild(object_property("value", expr)));
+			}
 		}
 
 		virtual void visit(NodeXMLAttributeList& node) {

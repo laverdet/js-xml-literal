@@ -1,7 +1,7 @@
 NODE_PREFIX := $(shell node --vars | egrep ^NODE_PREFIX: | cut -c14-)
 LIBFBJS = ../external/libfbjs
 LIBFBJS_A = $(LIBFBJS)/libfbjs.a
-CPPFLAGS = -ggdb -Wall -DNOT_FBMAKE=1 -I$(LIBFBJS)/.. -I$(NODE_PREFIX)/include -I$(NODE_PREFIX)/include/node
+CPPFLAGS = -fPIC -ggdb -Wall -DNOT_FBMAKE=1 -I$(LIBFBJS)/.. -I$(NODE_PREFIX)/include -I$(NODE_PREFIX)/include/node
 
 all: js-xml-literal.node
 
@@ -19,7 +19,7 @@ cli: cli.o desugar.o $(LIBFBJS_A)
 	$(CXX) $(CPPFLAGS) -o $@ $^
 
 js-xml-literal.node: js-xml-literal.o desugar.o $(LIBFBJS_A)
-	$(CXX) $(CPPFLAGS) -bundle -undefined dynamic_lookup -o $@ $^
+	$(CXX) $(CPPFLAGS) -fPIC -shared -Wl,-Bdynamic -o $@ $^
 
 clean:
 	-$(RM) cli.o desugar.o js-xml-literal.o cli js-xml-literal.node
