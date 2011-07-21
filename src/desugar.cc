@@ -57,7 +57,7 @@ class XMLDesugarWalker : public NodeWalker {
 		 */
 		static Node* object_property(const string &name, Node *val) {
 			return (new NodeObjectLiteralProperty)
-				->appendChild(new NodeStringLiteral(name, false))
+				->appendChild(new NodeIdentifier(name))
 				->appendChild(val);
 		}
 
@@ -165,11 +165,11 @@ class XMLDesugarWalker : public NodeWalker {
 					close_name = undefined_literal();
 				}
 				new_node = (new NodeObjectLiteral)
-					->appendChild(object_property("type", new NodeNumericLiteral(TYPE_ELEMENT)))
-					->appendChild(object_property("open", name))
-					->appendChild(object_property("close", close_name))
-					->appendChild(object_property("attributes", attrs))
-					->appendChild(object_property("content", content));
+					->appendChild(object_property("_type", new NodeNumericLiteral(TYPE_ELEMENT)))
+					->appendChild(object_property("_open", name))
+					->appendChild(object_property("_close", close_name))
+					->appendChild(object_property("_attributes", attrs))
+					->appendChild(object_property("_content", content));
 				if (!dynamic_cast<NodeXMLContentList*>(parent()->node())) {
 					new_node = runtime_fn("_el", 1, new_node);
 				}
@@ -197,8 +197,8 @@ class XMLDesugarWalker : public NodeWalker {
 				replace(value);
 			} else {
 				replace((new NodeObjectLiteral)
-					->appendChild(object_property("type", new NodeNumericLiteral(TYPE_CDATA)))
-					->appendChild(object_property("value", value)));
+					->appendChild(object_property("_type", new NodeNumericLiteral(TYPE_CDATA)))
+					->appendChild(object_property("_value", value)));
 			}
 		}
 
@@ -209,8 +209,8 @@ class XMLDesugarWalker : public NodeWalker {
 				replace(expr);
 			} else {
 				replace((new NodeObjectLiteral)
-					->appendChild(object_property("type", new NodeNumericLiteral(TYPE_EXPR)))
-					->appendChild(object_property("value", expr)));
+					->appendChild(object_property("_type", new NodeNumericLiteral(TYPE_EXPR)))
+					->appendChild(object_property("_value", expr)));
 			}
 		}
 
@@ -237,8 +237,8 @@ class XMLDesugarWalker : public NodeWalker {
 				}
 			}
 			replace((new NodeObjectLiteral)
-				->appendChild(object_property("keys", keys))
-				->appendChild(object_property("vals", vals)));
+				->appendChild(object_property("_keys", keys))
+				->appendChild(object_property("_vals", vals)));
 		}
 };
 
