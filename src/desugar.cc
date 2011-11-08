@@ -25,7 +25,7 @@ class XMLDesugarWalker : public NodeWalker {
 	typedef auto_ptr<XMLDesugarWalker> ptr;
 
 	private:
-		int* for_each_count;
+		map<string, string>* ns_map;
 
 		/**
 		 * Creates a node that's like
@@ -57,7 +57,7 @@ class XMLDesugarWalker : public NodeWalker {
 		 */
 		static Node* object_property(const string &name, Node *val) {
 			return (new NodeObjectLiteralProperty)
-				->appendChild(new NodeIdentifier(name))
+				->appendChild(new NodeStringLiteral(name, false))
 				->appendChild(val);
 		}
 
@@ -69,14 +69,29 @@ class XMLDesugarWalker : public NodeWalker {
 		}
 
 		/**
-		 * Returns a node for a local temporary variable
+		 * Creates an object literal property for an attributes map
 		 */
-		Node* tmp_varN() {
-			// doesn't get automatically declared
-			char buf[16];
-			sprintf(buf, "__FETMP%x", *for_each_count);
-			++*for_each_count;
-			return new NodeIdentifier(buf);
+		static Node* attr_object_property(const string &name, Node* val) {
+			Node* right;
+			if (dynamic_cast<NodeXMLTextData*>(val)) {
+				right = new NodeStringLiteral(dynamic_cast<NodeXMLTextData*>(val)->data(), false);
+			} else {
+				assert(dynamic_cast<NodeXMLEmbeddedExpression*>(val));
+				right = val->removeChild(val->childNodes().begin());
+			}
+			return object_property(name, right);
+		}
+
+		/**
+		 * Return the namespace uri for this name
+		 */
+		string lookup_ns(const string &ns) {
+			map<string, string>::iterator ii = ns_map->find(ns);
+			if (ii == ns_map->end()) {
+				return "?" + ns;
+			} else {
+				return ii->second;
+			}
 		}
 
 	public:
@@ -86,52 +101,9 @@ class XMLDesugarWalker : public NodeWalker {
 		virtual NodeWalker* clone() const { return new XMLDesugarWalker(*this); }
 
 		Node* walk(NodeProgram* node) {
-			auto_ptr<int> my_for_each_count(new int(0));
-			for_each_count = my_for_each_count.get();
+			map<string, string> my_ns_map;
+			ns_map = &my_ns_map;
 			return NodeWalker::walk(node);
-		}
-
-		virtual void visit(NodeForEachIn& node) {
-			// for each (var ii in foo) {}
-			// becomes
-			// var tmp1 = foo; for (var tmp2 in tmp1) { var ii = tmp1[tmp2]; }
-			ptr_vector ret_vector(visitChildren());
-			Node* iterator = node.removeChild(node.childNodes().begin());
-			Node* iterexpr = node.removeChild(node.childNodes().begin());
-			Node* action = node.removeChild(node.childNodes().begin());
-			Node* iterator_var = tmp_varN();
-			Node* iterexpr_var = tmp_varN();
-			Node* iterator_forward;
-
-			if (dynamic_cast<NodeVarDeclaration*>(iterator)) {
-				// var ii -> var ii = tmp1[tmp2];
-				iterator_forward = iterator;
-				iterator_forward->replaceChild((new NodeAssignment(ASSIGN))
-					->appendChild(iterator_forward->childNodes().front())
-					->appendChild((new NodeDynamicMemberExpression)
-						->appendChild(iterexpr_var)
-						->appendChild(iterator_var)),
-					iterator_forward->childNodes().begin());
-			} else {
-				// ii -> ii = tmp1[tmp2];
-				iterator_forward = (new NodeAssignment(ASSIGN))
-					->appendChild(iterator_forward)
-					->appendChild((new NodeDynamicMemberExpression)
-						->appendChild(iterexpr_var)
-						->appendChild(iterator_var));
-			}
-
-			replace((new NodeStatementList)
-				->appendChild((new NodeVarDeclaration)
-					->appendChild((new NodeAssignment(ASSIGN))
-						->appendChild(iterexpr_var->clone())
-						->appendChild(iterexpr)))
-				->appendChild((new NodeForIn)
-					->appendChild((new NodeVarDeclaration)->appendChild(iterator_var->clone()))
-					->appendChild(iterexpr_var->clone())
-					->appendChild((new NodeStatementList)
-						->appendChild(iterator_forward)
-						->appendChild(action))));
 		}
 
 		virtual void visit(NodeXMLName& node) {
@@ -145,35 +117,121 @@ class XMLDesugarWalker : public NodeWalker {
 		}
 
 		virtual void visit(NodeXMLElement& node) {
-			// Decode XML literals into an object literal descriptor and pass that through _el.
-			visitChildren();
-
-			Node* name = node.removeChild(node.childNodes().begin());
+			// Rip this node apart
+			NodeXMLName* name = dynamic_cast<NodeXMLName*>(node.removeChild(node.childNodes().begin()));
 			Node* attrs = node.removeChild(node.childNodes().begin());
 			Node* content = node.removeChild(node.childNodes().begin());
-			Node* close_name = node.removeChild(node.childNodes().begin());
+			NodeXMLName* close_name = dynamic_cast<NodeXMLName*>(node.removeChild(node.childNodes().begin()));
 
+			// Fragment node? Skip everything below.
 			if (name == NULL) {
-				// XML list
 				assert(attrs == NULL);
 				assert(close_name == NULL);
+				assert(!dynamic_cast<NodeXMLContentList*>(parent()->node()));
+				node.appendChild(content);
+				visitChildren();
+				content = node.removeChild(node.childNodes().begin());
 				replace(runtime_fn("_frag", 1, content));
+				return;
+			}
+
+			// Find new namespaces defined on this node
+			map<string, string> new_ns_map;
+			if (attrs) {
+				assert(dynamic_cast<NodeXMLAttributeList*>(attrs) != NULL);
+				foreach (Node* ii, attrs->childNodes()) {
+					NodeXMLName* key = dynamic_cast<NodeXMLName*>(ii->childNodes().front());
+					Node* val = ii->childNodes().back();
+					if (key->ns() == "xmlns") {
+						if (new_ns_map.find(key->name()) != new_ns_map.end()) {
+							throw runtime_error("duplicate ns defined on node");
+						} else if (dynamic_cast<NodeXMLTextData*>(val) == NULL) {
+							throw runtime_error("invalid xmlns value");
+						}
+						new_ns_map.insert(pair<string, string>(key->name(), dynamic_cast<NodeXMLTextData*>(val)->data()));
+					}
+				}
+			}
+
+			// Were there new namespaces defined?
+			map<string, string> next_ns_map;
+			map<string, string>* old_ns_map = NULL;
+			if (!new_ns_map.empty()) {
+				old_ns_map = ns_map;
+				next_ns_map = *ns_map;
+				next_ns_map.insert(new_ns_map.begin(), new_ns_map.end());
+				ns_map = &next_ns_map;
+			}
+
+			// Create an object literal for non-namespaced attributes
+			NodeObjectLiteral* attributes_descriptor = NULL;
+			if (attrs) {
+				foreach (Node* ii, attrs->childNodes()) {
+					NodeXMLName* key = dynamic_cast<NodeXMLName*>(ii->childNodes().front());
+					if (key->ns() != "") {
+						continue;
+					}
+					if (attributes_descriptor == NULL) {
+						attributes_descriptor = new NodeObjectLiteral;
+					}
+					attributes_descriptor->appendChild(attr_object_property(key->name(), ii->childNodes().back()));
+				}
+			}
+
+			// Create an object literal for non-namespaced attributes
+			Node* ns_attributes_descriptor = NULL;
+			if (attrs) {
+				map<string, NodeObjectLiteral*> ns_attr_nodes;
+				foreach (Node* ii, attrs->childNodes()) {
+					NodeXMLName* key = dynamic_cast<NodeXMLName*>(ii->childNodes().front());
+					if (key->ns() == "" && key->ns() != "xmlns") {
+						continue;
+					}
+					string ns = lookup_ns(key->ns());
+					if (ns_attr_nodes.find(ns) == ns_attr_nodes.end()) {
+						ns_attr_nodes.insert(pair<string, NodeObjectLiteral*>(ns, new NodeObjectLiteral));
+					}
+					NodeObjectLiteral* attr_desc = ns_attr_nodes.find(ns)->second;
+					attr_desc->appendChild(attr_object_property(key->name(), ii->childNodes().back()));
+				}
+				if (!ns_attr_nodes.empty()) {
+					ns_attributes_descriptor = new NodeObjectLiteral;
+					typedef pair<string, NodeObjectLiteral*> pp;
+					foreach (pp ii, ns_attr_nodes) {
+						ns_attributes_descriptor->appendChild(object_property(ii.first, ii.second));
+					}
+				}
+			}
+
+			// Begin making a descriptor for this element
+			assert(!close_name || (name->ns() == close_name->ns() && name->name() == close_name->name()));
+			Node* desc = (new NodeObjectLiteral);
+			desc->appendChild(object_property("_type", new NodeNumericLiteral(TYPE_ELEMENT)));
+			if (name->ns() != "") {
+				desc->appendChild(object_property("_ns", new NodeStringLiteral(lookup_ns(name->ns()), false)));
+			}
+			desc->appendChild(object_property("_name", new NodeStringLiteral(name->name(), false)));
+			if (attributes_descriptor) {
+				desc->appendChild(object_property("_attrs", attributes_descriptor));
+			}
+			if (ns_attributes_descriptor) {
+				desc->appendChild(object_property("_ns_attrs", ns_attributes_descriptor));
+			}
+			node.appendChild(content);
+			visitChildren();
+			content = node.removeChild(node.childNodes().begin());
+			desc->appendChild(object_property("_content", content));
+
+			// Call runtime, or already part of a nested descriptor?
+			if (!dynamic_cast<NodeXMLContentList*>(parent()->node())) {
+				replace(runtime_fn("_el", 1, desc));
 			} else {
-				// XML element
-				Node* new_node;
-				if (close_name == NULL) {
-					close_name = undefined_literal();
-				}
-				new_node = (new NodeObjectLiteral)
-					->appendChild(object_property("_type", new NodeNumericLiteral(TYPE_ELEMENT)))
-					->appendChild(object_property("_open", name))
-					->appendChild(object_property("_close", close_name))
-					->appendChild(object_property("_attributes", attrs))
-					->appendChild(object_property("_content", content));
-				if (!dynamic_cast<NodeXMLContentList*>(parent()->node())) {
-					new_node = runtime_fn("_el", 1, new_node);
-				}
-				replace(new_node);
+				replace(desc);
+			}
+
+			// Reset ns?
+			if (old_ns_map) {
+				ns_map = old_ns_map;
 			}
 		}
 
@@ -224,7 +282,7 @@ class XMLDesugarWalker : public NodeWalker {
 
 			Node* keys = new NodeArrayLiteral;
 			Node* vals = new NodeArrayLiteral;
-			foreach(Node* ii, node.childNodes()) {
+			foreach (Node* ii, node.childNodes()) {
 				Node* key = ii->removeChild(ii->childNodes().begin());
 				Node* val = ii->removeChild(ii->childNodes().begin());
 				keys->appendChild(key);

@@ -1,4 +1,4 @@
-NODE_PREFIX := $(shell node --vars | egrep ^NODE_PREFIX: | cut -c14-)
+NODE_PREFIX := $(shell echo "console.log(require('path').dirname(require('path').dirname(process.execPath)))" | node)
 LIBFBJS = ../external/libfbjs
 LIBFBJS_A = $(LIBFBJS)/libfbjs.a
 CPPFLAGS = -fPIC -ggdb -Wall -DNOT_FBMAKE=1 -I$(LIBFBJS)/.. -I$(NODE_PREFIX)/include -I$(NODE_PREFIX)/include/node
