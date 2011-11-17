@@ -56,8 +56,14 @@ class XMLDesugarWalker : public NodeWalker {
 		 * Creates a NodeObjectLiteralProperty from a name and value
 		 */
 		static Node* object_property(const string &name, Node *val) {
+			Node* key;
+			if (name[0] == '_') {
+				key = new NodeIdentifier(name);
+			} else {
+				key = new NodeStringLiteral(name, false);
+			}
 			return (new NodeObjectLiteralProperty)
-				->appendChild(new NodeStringLiteral(name, false))
+				->appendChild(key)
 				->appendChild(val);
 		}
 
@@ -178,7 +184,7 @@ class XMLDesugarWalker : public NodeWalker {
 				}
 			}
 
-			// Create an object literal for non-namespaced attributes
+			// Create an object literal for namespaced attributes
 			Node* ns_attributes_descriptor = NULL;
 			if (attrs) {
 				map<string, NodeObjectLiteral*> ns_attr_nodes;
