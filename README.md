@@ -83,6 +83,9 @@ taking a look at `jsdom`, however you will incur a large performance penalty her
 nodes include a toString() method, so you can convert your DOM to string to send to the browser
 easily.
 
+A quick example is included. [Hello
+World](https://github.com/laverdet/js-xml-literal/tree/master/example)
+
 
 IN THE BROWSER
 --------------
