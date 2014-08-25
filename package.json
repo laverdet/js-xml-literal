@@ -1,6 +1,6 @@
 {
 	"name": "xml-literals",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Portable XML literal support for Javascript",
 	"keywords": ["xml", "dom", "templating"],
 	"homepage": "https://github.com/laverdet/js-xml-literal",
